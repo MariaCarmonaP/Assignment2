@@ -5,6 +5,15 @@
  */
 package chess;
 
+import chess.search.UniformCost;
+import chess.search.Search;
+import chess.search.DepthLimited;
+import chess.search.BestFirst;
+import chess.search.DepthFirst;
+import chess.search.AStar;
+import chess.search.BreadthFirst;
+import chess.search.IterativeDeepening;
+import chess.pieces.Utils;
 import java.util.ArrayList;
 
 /**

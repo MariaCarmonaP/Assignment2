@@ -3,8 +3,19 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package chess;
+package Results;
 
+import chess.search.AStar;
+import chess.Action;
+import chess.search.BestFirst;
+import chess.search.BreadthFirst;
+import chess.search.DepthFirst;
+import chess.search.IterativeDeepening;
+import chess.search.Search;
+import chess.SearchChess;
+import chess.State;
+import chess.search.UniformCost;
+import chess.pieces.Utils;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;

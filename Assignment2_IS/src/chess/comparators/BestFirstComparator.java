@@ -3,8 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package chess;
+package chess.comparators;
 
+import chess.Node;
 import java.util.Comparator;
 
 /**

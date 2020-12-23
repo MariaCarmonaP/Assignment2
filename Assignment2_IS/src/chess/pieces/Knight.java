@@ -1,6 +1,10 @@
-package chess;
+package chess.pieces;
 
 
+import chess.Action;
+import chess.Position;
+import chess.State;
+import chess.pieces.Utils;
 import java.util.ArrayList;
 
 /*

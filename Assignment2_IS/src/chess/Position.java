@@ -2,11 +2,11 @@ package chess;
 
 public class Position {
 
-    int row;
-    int col;
+    public int row;
+    public int col;
 
     // constructor
-    Position(int r, int c) {
+    public Position(int r, int c) {
         row = r;
         col = c;
     }

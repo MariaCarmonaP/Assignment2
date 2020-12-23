@@ -1,6 +1,8 @@
 
-package chess;
+package chess.search;
 
+import chess.State;
+import chess.comparators.AStarComparator;
 import java.util.PriorityQueue;
 
 public class AStar extends Search{

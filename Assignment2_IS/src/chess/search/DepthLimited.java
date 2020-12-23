@@ -1,5 +1,7 @@
-package chess;
+package chess.search;
 
+import chess.Action;
+import chess.State;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Stack;

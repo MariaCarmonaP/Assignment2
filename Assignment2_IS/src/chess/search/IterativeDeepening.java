@@ -1,6 +1,8 @@
 
-package chess;
+package chess.search;
 
+import chess.Action;
+import chess.State;
 import java.util.ArrayList;
 
 public class IterativeDeepening extends Search{

@@ -1,4 +1,6 @@
-package chess;
+package chess.pieces;
+import chess.Position;
+import chess.State;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Random;
@@ -6,28 +8,28 @@ import java.util.Random;
 public class Utils {
 
 	// all the pieces
-	static final int wPawn = 0;
-	static final int wRook = 1;
-	static final int wBishop = 2;
-	static final int wKnight = 3;
-	static final int wQueen = 4;
-	static final int wKing = 5;
-	static final int bPawn = 6;
-	static final int bRook = 7;
-	static final int bBishop = 8;
-	static final int bKnight = 9;
-	static final int bQueen = 10;
-	static final int bKing = 11;
-	static final int empty = 12;
+	public static final int wPawn = 0;
+	public static final int wRook = 1;
+	public static final int wBishop = 2;
+	public static final int wKnight = 3;
+	public static final int wQueen = 4;
+	public static final int wKing = 5;
+	public static final int bPawn = 6;
+	public static final int bRook = 7;
+	public static final int bBishop = 8;
+	public static final int bKnight = 9;
+	public static final int bQueen = 10;
+	public static final int bKing = 11;
+	public static final int empty = 12;
 	
 	// number of pieces
-	static final int diffPieces = 12;
+	public static final int diffPieces = 12;
 	
 	
 	// name (and letter) of each piece
-	static final String[] names = {"wPawn", "wRook", "wBishop", "wKnight", "wQueen", "wKing", 
+	public static final String[] names = {"wPawn", "wRook", "wBishop", "wKnight", "wQueen", "wKing", 
 								 "bPawn", "bRook", "bBishop", "bKnight", "bQueen", "bKing"};
-	static final String[] letters = {"P","R","B","N","Q","K","p","r","b","n","q","k"," "}; 
+	public static final String[] letters = {"P","R","B","N","Q","K","p","r","b","n","q","k"," "}; 
 											// Note we use N for Knight instead of K (to avoid confussion with King)
 											// Note we add " " for empty cell
 	

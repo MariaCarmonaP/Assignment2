@@ -3,8 +3,20 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package chess;
+package chess.search;
 
+import chess.Action;
+import chess.Node;
+import chess.Position;
+import chess.State;
+import chess.pieces.Utils;
+import chess.pieces.Piece;
+import chess.pieces.Bishop;
+import chess.pieces.Knight;
+import chess.pieces.Rook;
+import chess.pieces.Pawn;
+import chess.pieces.Queen;
+import chess.pieces.King;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
@@ -18,14 +30,14 @@ import java.util.Stack;
  */
 public abstract class Search {
 
-    Node current = null;
-    Piece piece = null;
-    HashSet<Position> visited = null;
-    ArrayList<Node> successors = null;
-    int N_NODES = 0;
-    int N_EXPAND = 0;
-    int N_EXPLO = 0;
-    Collection<Node> open;
+    public Node current = null;
+    public Piece piece = null;
+    public HashSet<Position> visited = null;
+    public ArrayList<Node> successors = null;
+    public int N_NODES = 0;
+    public int N_EXPAND = 0;
+    public int N_EXPLO = 0;
+    public Collection<Node> open;
 
     Search(State s0) {
         current = new Node(s0);

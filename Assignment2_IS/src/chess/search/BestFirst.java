@@ -1,6 +1,8 @@
 
-package chess;
+package chess.search;
 
+import chess.State;
+import chess.comparators.BestFirstComparator;
 import java.util.PriorityQueue;
 
 public class BestFirst extends Search{

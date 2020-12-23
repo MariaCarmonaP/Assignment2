@@ -1,17 +1,20 @@
 package chess;
 
 // This class contains the information needed to represent a state 
+
+import chess.pieces.Utils;
+
 // and some useful methods
 
 public class State {
-	int[][] m_board = null;
-	Position m_agentPos = null;
-	int m_agent = -1; // the type of piece
-	int m_color = 0; // 0 for white, 1 for black
-	int m_boardSize = -1; 
+	public int[][] m_board = null;
+	public Position m_agentPos = null;
+	public int m_agent = -1; // the type of piece
+	public int m_color = 0; // 0 for white, 1 for black
+	public int m_boardSize = -1; 
 	
 	// constructor
-	State(int[][] board, Position pos, int a){
+	public State(int[][] board, Position pos, int a){
 		m_board = board;
 		m_agentPos = pos;
 		m_agent = a;

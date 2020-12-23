@@ -3,8 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package chess;
+package Results;
 
+import chess.SimpleRandomSearch;
+import chess.State;
+import chess.pieces.Utils;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
@@ -17,7 +20,7 @@ import java.util.logging.Logger;
  *
  * @author maric
  */
-public class GenResNoSolSRS {
+public class GenerateResultsSRS {
 
     public static void main(String[] args) {
         int size = 15;
@@ -54,12 +57,12 @@ public class GenResNoSolSRS {
         FileWriter fw1;
         PrintWriter pw1;
         try {
-            fw = new FileWriter(new File("C:\\Users\\maric\\Documents\\1erCuatri\\Inteligentes\\practices\\NOSOLSRSResults.txt"), true);
+            fw = new FileWriter(new File("C:\\Users\\maric\\Documents\\1erCuatri\\Inteligentes\\practices\\SRSResults.txt"), true);
             pw = new PrintWriter(fw);
-            fw1 = new FileWriter(new File("C:\\Users\\maric\\Documents\\1erCuatri\\Inteligentes\\practices\\NOSOLSRSFinalResults.txt"), true);
+            fw1 = new FileWriter(new File("C:\\Users\\maric\\Documents\\1erCuatri\\Inteligentes\\practices\\SRSFinalResults.txt"), true);
             pw1 = new PrintWriter(fw1);
-            pw.println("n_run\tpiece\tseed1\tseed2\tgenN\texpaN\texploN\ttime");
-            pw1.println("piece\tn_sol/900\tgenN\tSD_GenN\texpaN\tSD_ExpaN\texploN\tSD_ExploN\ttime\tSD_Time");
+            pw.println("n_run\tpiece\tseed1\tseed2\tgenN\texpaN\texploN\tlength\tcost\ttime");
+            pw1.println("piece\tn_sol/900\tgenN\tSD_GenN\texpaN\tSD_ExpaN\texploN\tSD_ExploN\tlength\tSD_Length\tcost\tSD_Cost\ttime\tSD_Time");
             for (; piece < 6; piece++) {
                 i = 0;
                 cost = 0;
@@ -92,8 +95,6 @@ public class GenResNoSolSRS {
                             aCost[i] = srs.m_cost;
                             length += srs.m_solution.size();
                             aLength[i] = srs.m_solution.size();
-                            
-                        } else {
                             genN += srs.genN;
                             aGenN[i] = srs.genN;
                             expaN += srs.expaN;
@@ -101,22 +102,26 @@ public class GenResNoSolSRS {
                             exploN += srs.exploN;
                             aExploN[i] = srs.exploN;
                             n_sol++;
+                        } else {
                             noSol[i] = false;
                             aLength[i] = -1;
                             aCost[i] = -1;
-                            pw.println(i + "\t" + piece + "\t" + seed1 + "\t" + seed2 + "\t" + srs.genN + "\t" + srs.expaN + "\t" + srs.exploN + "\t" + time);
-                        
                         }
+                        pw.println(i + "\t" + piece + "\t" + seed1 + "\t" + seed2 + "\t" + srs.genN + "\t" + srs.expaN + "\t" + srs.exploN + "\t" + aLength[i] + "\t" + aCost[i] + "\t" + time);
                         i++;
                     }
                 }
                 Ttime /= n_sol;
+                cost /= n_sol;
+                length /= n_sol;
                 genN /= n_sol;
                 expaN /= n_sol;
                 exploN /= n_sol;
                 for (int j = 0; j < i; j++) {
-                    if (!noSol[j]) {
+                    if (noSol[j]) {
                         timeSD += Math.pow(Math.abs(aTime[j] - Ttime), 2);
+                        costSD += Math.pow(Math.abs(aCost[j] - cost), 2);
+                        lengthSD += Math.pow(Math.abs(aLength[j] - length), 2);
                         genNSD += Math.pow(Math.abs(aGenN[j] - genN), 2);
                         expaNSD += Math.pow(Math.abs(aExpaN[j] - expaN), 2);
                         exploNSD += Math.pow(Math.abs(aExploN[j] - exploN), 2);
@@ -129,7 +134,7 @@ public class GenResNoSolSRS {
                 expaNSD = Math.sqrt(expaNSD / (n_sol - 1));
                 exploNSD = Math.sqrt(exploNSD / (n_sol - 1));
                 pw1.format("%d\t%d\t%.0f\t%.0f\t%.0f\t%.0f\t%.0f\t", piece, n_sol, genN, genNSD, expaN, expaNSD, exploN);
-                pw1.format("%.0f\t%.0f\t%.0f\n", exploNSD, Ttime, timeSD);
+                pw1.format("%.0f\t%.1f\t%.1f\t%.1f\t%.1f\t%.0f\t%.0f\n", exploNSD, length, lengthSD, cost, costSD, Ttime, timeSD);
                 //pw1.println(piece + "\t" + n_sol+ "\t" + genN + "\t" + genNSD + "\t" + expaN + "\t" + expaNSD + "\t" + exploN + "\t" + exploNSD + "\t" + length + "\t" + lengthSD + "\t" + cost + "\t" + costSD + "\t" + Ttime + "\t" + timeSD);
             }
             fw.close();

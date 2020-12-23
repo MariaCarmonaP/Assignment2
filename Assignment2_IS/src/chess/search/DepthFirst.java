@@ -1,6 +1,7 @@
 
-package chess;
+package chess.search;
 
+import chess.State;
 import java.util.Stack;
 
 public class DepthFirst extends Search{

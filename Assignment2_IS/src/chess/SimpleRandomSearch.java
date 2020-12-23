@@ -1,5 +1,13 @@
 package chess;
 
+import chess.pieces.Utils;
+import chess.pieces.Piece;
+import chess.pieces.Bishop;
+import chess.pieces.Knight;
+import chess.pieces.Rook;
+import chess.pieces.Pawn;
+import chess.pieces.Queen;
+import chess.pieces.King;
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -10,20 +18,20 @@ import java.util.Random;
 public class SimpleRandomSearch {
 
     // member variables
-    State m_initialState = null;
-    int m_seedRS = -1;
-    Random m_generator = null;
-    ArrayList<Action> m_solution = null;
-    Piece m_piece = null;
-    State m_finalState = null;
-    int exploN = 0;
-    int expaN = 0;
-    int genN = 1;
-    double m_cost = 0.0;
-    Boolean solutionFound = false;
+    public State m_initialState = null;
+    public int m_seedRS = -1;
+    public Random m_generator = null;
+    public ArrayList<Action> m_solution = null;
+    public Piece m_piece = null;
+    public State m_finalState = null;
+    public int exploN = 0;
+    public int expaN = 0;
+    public int genN = 1;
+    public double m_cost = 0.0;
+    public Boolean solutionFound = false;
 
     // constructor
-    SimpleRandomSearch(State s0, int seed) {
+    public SimpleRandomSearch(State s0, int seed) {
         m_initialState = s0;
         m_seedRS = seed;
         m_generator = new Random(m_seedRS);

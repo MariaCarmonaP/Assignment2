@@ -1,6 +1,7 @@
 
-package chess;
+package chess.search;
 
+import chess.State;
 import java.util.LinkedList;
 
 public class BreadthFirst extends Search{
