@@ -29,7 +29,15 @@ public class State {
 //            return this.m_agentPos.row == this.m_boardSize-1;
 //	}
 	public boolean isFinal(){
-            return true;
+            int count=0;
+            for(int i=0; i<m_boardSize; i++){
+                for(int j=0; j<m_boardSize; j++){
+                    if(m_board[i][j]==5 ||m_board[i][j]==11){
+                        count++;
+                    }
+                }
+            }
+            return count!=2;
         }
 	// hard copy of an State
 	public State copy(){
