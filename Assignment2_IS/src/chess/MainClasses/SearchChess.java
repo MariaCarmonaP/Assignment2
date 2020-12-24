@@ -3,8 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package chess;
+package chess.MainClasses;
 
+import chess.Action;
+import chess.State;
 import chess.search.UniformCost;
 import chess.search.Search;
 import chess.search.DepthLimited;
@@ -13,7 +15,7 @@ import chess.search.DepthFirst;
 import chess.search.AStar;
 import chess.search.BreadthFirst;
 import chess.search.IterativeDeepening;
-import chess.pieces.Utils;
+import chess.Utils;
 import java.util.ArrayList;
 
 /**

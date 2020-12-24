@@ -2,7 +2,7 @@ package chess.pieces;
 
 import chess.Action;
 import chess.State;
-import chess.pieces.Utils;
+import chess.Utils;
 import java.util.ArrayList;
 
 //this class implements the getPossibleActions for each type of piece

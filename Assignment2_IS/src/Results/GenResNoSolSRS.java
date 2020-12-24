@@ -5,9 +5,9 @@
  */
 package Results;
 
-import chess.SimpleRandomSearch;
+import chess.MainClasses.SimpleRandomSearch;
 import chess.State;
-import chess.pieces.Utils;
+import chess.Utils;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;

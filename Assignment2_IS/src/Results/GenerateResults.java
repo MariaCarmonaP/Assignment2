@@ -14,7 +14,7 @@ import chess.search.IterativeDeepening;
 import chess.search.Search;
 import chess.State;
 import chess.search.UniformCost;
-import chess.pieces.Utils;
+import chess.Utils;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;

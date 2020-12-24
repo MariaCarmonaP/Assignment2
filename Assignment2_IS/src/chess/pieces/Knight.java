@@ -4,7 +4,7 @@ package chess.pieces;
 import chess.Action;
 import chess.Position;
 import chess.State;
-import chess.pieces.Utils;
+import chess.Utils;
 import java.util.ArrayList;
 
 /*

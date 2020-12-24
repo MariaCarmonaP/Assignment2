@@ -9,7 +9,7 @@ import chess.Action;
 import chess.Node;
 import chess.Position;
 import chess.State;
-import chess.pieces.Utils;
+import chess.Utils;
 import chess.pieces.Piece;
 import chess.pieces.Bishop;
 import chess.pieces.Knight;

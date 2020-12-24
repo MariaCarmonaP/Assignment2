@@ -1,4 +1,4 @@
-package chess.pieces;
+package chess;
 import chess.Position;
 import chess.State;
 import java.text.DecimalFormat;

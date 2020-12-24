@@ -2,10 +2,6 @@ package chess;
 
 // This class contains the information needed to represent a state 
 
-import chess.pieces.Utils;
-
-// and some useful methods
-
 public class State {
 	public int[][] m_board = null;
 	public Position m_agentPos = null;

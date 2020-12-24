@@ -3,14 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package chess.MainClasses;
+package chess.adversarialSearch;
 
 /**
  *
  * @author maric
  */
-public class AdversarialSearch {
-    public static void main(String[] args) {
-        
-    }
+public class MiniMax {
+    
 }

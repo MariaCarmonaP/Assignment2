@@ -1,6 +1,8 @@
-package chess;
+package chess.MainClasses;
 
-import chess.pieces.Utils;
+import chess.Action;
+import chess.State;
+import chess.Utils;
 import chess.pieces.Piece;
 import chess.pieces.Bishop;
 import chess.pieces.Knight;
