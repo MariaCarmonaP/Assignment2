@@ -1,5 +1,7 @@
 package chess.MainClasses;
 
+import chess.State;
+import chess.Utils;
 import java.util.Scanner;
 
 public class Chess {
@@ -17,6 +19,7 @@ public class Chess {
         int seed;
         // other-parameters
         String[] args1;
+        State state;
 ////////////////////////////////////////////////////////////////////////////////
 //PARAMETER VALIDATION
 ////////////////////////////////////////////////////////////////////////////////
@@ -38,7 +41,6 @@ public class Chess {
                 }
             }
         }
-
     }
 
     public static String[] checkUsage(String[] args) {
