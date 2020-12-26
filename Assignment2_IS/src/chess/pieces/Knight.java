@@ -42,7 +42,7 @@ public class Knight extends Piece {
         }
         ArrayList<Action> list = new ArrayList<>(8);
         Action action;
-        if (m_color == 0) {// white knight
+        //if (m_color == 0) {// White knight
             for (int r = 0; r < 4; r++) {
                 c = (r + 1) % 4;
                 if ((arrC[c] >= 0) && (arrC[c] < state.m_boardSize) && (arrR[r] >= 0) && (arrR[r] < state.m_boardSize)) {
@@ -65,7 +65,7 @@ public class Knight extends Piece {
                     }
                 }
             }
-        }
+        //}
         return list;
     }
 
