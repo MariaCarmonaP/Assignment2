@@ -13,7 +13,7 @@ public class Piece {
 	// members
 	int m_color = -1;
 	int m_type = -1;
-	
+	int valor;
 	// this method must be overwritten by all the possible pieces
 	
 	public ArrayList<Action> getPossibleActions(State state){

@@ -42,7 +42,8 @@ public class Utils {
     public static State getChessInstancePosition(double p, int seed) {
         int n = 8;
         int[][] board = new int[n][n];
-        int[] numPieces = {8,2,2,2,1,1,8,2,2,2,1,1,0};
+        int[] numPieces = {8,2,2,2,1,1,8,2,2,2,1,1};
+        int[] numPieces1 = {0,0,0,0,0,0,0,0,0,0,0,0};
         for (int r = 0; r < n; r++) {
             for (int c = 0; c < n; c++) {
                 board[r][c] = Utils.empty;
@@ -55,10 +56,12 @@ public class Utils {
         Position wkingPos = allPositions.remove(r);
         board[wkingPos.row][wkingPos.col] = Utils.wKing;
         numPieces[Utils.wKing] -= 1;
+        numPieces[Utils.wKing]++;
         r = gen.nextInt((n * n) - 1);
         Position bkingPos = allPositions.remove(r);
         board[bkingPos.row][bkingPos.col] = Utils.bKing;
         numPieces[Utils.bKing] -= 1;
+        numPieces[Utils.bKing]++;
         // placing the rest of chess.pieces
         Position pos = null;
         for (int piece = 0; piece < diffPieces; piece++) {
@@ -67,11 +70,12 @@ public class Utils {
                     r = gen.nextInt(allPositions.size());
                     pos = allPositions.remove(r);
                     board[pos.row][pos.col] = piece;
+                    numPieces1[piece]++;
                 }
             }
         }
         // Creating the instance, i.e., the state
-        State state = new State(board);
+        State state = new State(board, numPieces1);
         return state;
     }
 
@@ -107,7 +111,8 @@ public class Utils {
         board[n - 1][3] = Utils.bKing;
         board[n - 1][4] = Utils.bQueen;
 // Creating the instance, i.e., the state
-        State state = new State(board);
+        int[] numPieces = {8,2,2,2,1,1,8,2,2,2,1,1};
+        State state = new State(board, numPieces);
         return state;
     }
 

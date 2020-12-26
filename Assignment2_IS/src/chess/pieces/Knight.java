@@ -1,6 +1,5 @@
 package chess.pieces;
 
-
 import chess.Action;
 import chess.Position;
 import chess.State;
@@ -21,7 +20,7 @@ public class Knight extends Piece {
     // constructor
     public Knight(int color) {
         m_color = color;
-
+        this.valor = 3;
         if (color == 0) {
             m_type = Utils.wKnight;
         } else {
@@ -43,28 +42,28 @@ public class Knight extends Piece {
         ArrayList<Action> list = new ArrayList<>(8);
         Action action;
         //if (m_color == 0) {// White knight
-            for (int r = 0; r < 4; r++) {
-                c = (r + 1) % 4;
-                if ((arrC[c] >= 0) && (arrC[c] < state.m_boardSize) && (arrR[r] >= 0) && (arrR[r] < state.m_boardSize)) {
-                    if (state.m_board[arrR[r]][arrC[c]] == Utils.empty) {
-                        action = new Action(state.m_agentPos, new Position(arrR[r], arrC[c]));
-                        list.add(action);
-                    } else if (isEnemy(state, arrR[r], arrC[c])) {
-                        action = new Action(state.m_agentPos, new Position(arrR[r], arrC[c]));
-                        list.add(action);
-                    }
-                }
-                c = (r + 3) % 4;
-                if ((arrC[c] >= 0) && (arrC[c] < state.m_boardSize) && (arrR[r] >= 0) && (arrR[r] < state.m_boardSize)) {
-                    if (state.m_board[arrR[r]][arrC[c]] == Utils.empty) {
-                        action = new Action(state.m_agentPos, new Position(arrR[r], arrC[c]));
-                        list.add(action);
-                    } else if (isEnemy(state, arrR[r], arrC[c])) {
-                        action = new Action(state.m_agentPos, new Position(arrR[r], arrC[c]));
-                        list.add(action);
-                    }
+        for (int r = 0; r < 4; r++) {
+            c = (r + 1) % 4;
+            if ((arrC[c] >= 0) && (arrC[c] < state.m_boardSize) && (arrR[r] >= 0) && (arrR[r] < state.m_boardSize)) {
+                if (state.m_board[arrR[r]][arrC[c]] == Utils.empty) {
+                    action = new Action(state.m_agentPos, new Position(arrR[r], arrC[c]));
+                    list.add(action);
+                } else if (isEnemy(state, arrR[r], arrC[c])) {
+                    action = new Action(state.m_agentPos, new Position(arrR[r], arrC[c]));
+                    list.add(action);
                 }
             }
+            c = (r + 3) % 4;
+            if ((arrC[c] >= 0) && (arrC[c] < state.m_boardSize) && (arrR[r] >= 0) && (arrR[r] < state.m_boardSize)) {
+                if (state.m_board[arrR[r]][arrC[c]] == Utils.empty) {
+                    action = new Action(state.m_agentPos, new Position(arrR[r], arrC[c]));
+                    list.add(action);
+                } else if (isEnemy(state, arrR[r], arrC[c])) {
+                    action = new Action(state.m_agentPos, new Position(arrR[r], arrC[c]));
+                    list.add(action);
+                }
+            }
+        }
         //}
         return list;
     }

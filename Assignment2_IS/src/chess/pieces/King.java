@@ -1,6 +1,5 @@
 package chess.pieces;
 
-
 import chess.Action;
 import chess.Position;
 import chess.State;
@@ -21,7 +20,7 @@ public class King extends Piece {
     // constructor
     public King(int color) {
         m_color = color;
-
+        this.valor = 0;
         if (color == 0) {
             m_type = Utils.wKing;
         } else {
@@ -42,36 +41,36 @@ public class King extends Piece {
         }
 
         ArrayList<Action> list = new ArrayList<Action>(3);
-        
+
         //if (m_color == 0) {// White king
-            if (r + 1 < state.m_boardSize) {
-                if (state.m_board[r + 1][c] == Utils.empty || ((state.m_board[r + 1][c] != Utils.empty) && (Utils.getColorPiece(state.m_board[r + 1][c]) == 1))) {
-                    list.add(new Action(state.m_agentPos, new Position(r + 1, c)));
-                }
-                if (c + 1 < state.m_boardSize && (state.m_board[r + 1][c + 1] == Utils.empty || ((state.m_board[r + 1][c + 1] != Utils.empty) && (Utils.getColorPiece(state.m_board[r + 1][c + 1]) == 1)))) {
-                    list.add(new Action(state.m_agentPos, new Position(r + 1, c + 1)));
-                }
-                if (c - 1 >= 0 && (state.m_board[r + 1][c - 1] == Utils.empty || ((state.m_board[r + 1][c - 1] != Utils.empty) && (Utils.getColorPiece(state.m_board[r + 1][c - 1]) == 1)))) {
-                    list.add(new Action(state.m_agentPos, new Position(r + 1, c - 1)));
-                }
+        if (r + 1 < state.m_boardSize) {
+            if (state.m_board[r + 1][c] == Utils.empty || ((state.m_board[r + 1][c] != Utils.empty) && (Utils.getColorPiece(state.m_board[r + 1][c]) == 1))) {
+                list.add(new Action(state.m_agentPos, new Position(r + 1, c)));
             }
-            if (r - 1 >= 0) {
-                if (c - 1 >= 0 && (state.m_board[r - 1][c - 1] == Utils.empty || ((state.m_board[r - 1][c - 1] != Utils.empty) && (Utils.getColorPiece(state.m_board[r - 1][c - 1]) == 1)))) {
-                    list.add(new Action(state.m_agentPos, new Position(r - 1, c - 1)));
-                }
-                if (state.m_board[r - 1][c] == Utils.empty || ((state.m_board[r - 1][c] != Utils.empty) && (Utils.getColorPiece(state.m_board[r - 1][c]) == 1))) {
-                    list.add(new Action(state.m_agentPos, new Position(r - 1, c)));
-                }
-                if (c + 1 < state.m_boardSize && (state.m_board[r - 1][c + 1] == Utils.empty || ((state.m_board[r - 1][c + 1] != Utils.empty) && (Utils.getColorPiece(state.m_board[r - 1][c + 1]) == 1)))) {
-                    list.add(new Action(state.m_agentPos, new Position(r - 1, c + 1)));
-                }
+            if (c + 1 < state.m_boardSize && (state.m_board[r + 1][c + 1] == Utils.empty || ((state.m_board[r + 1][c + 1] != Utils.empty) && (Utils.getColorPiece(state.m_board[r + 1][c + 1]) == 1)))) {
+                list.add(new Action(state.m_agentPos, new Position(r + 1, c + 1)));
             }
-            if (c + 1 < state.m_boardSize && (state.m_board[r][c + 1] == Utils.empty || ((state.m_board[r][c + 1] != Utils.empty) && (Utils.getColorPiece(state.m_board[r][c + 1]) == 1)))) {
-                list.add(new Action(state.m_agentPos, new Position(r, c + 1)));
+            if (c - 1 >= 0 && (state.m_board[r + 1][c - 1] == Utils.empty || ((state.m_board[r + 1][c - 1] != Utils.empty) && (Utils.getColorPiece(state.m_board[r + 1][c - 1]) == 1)))) {
+                list.add(new Action(state.m_agentPos, new Position(r + 1, c - 1)));
             }
-            if (c - 1 >= 0 && (state.m_board[r][c - 1] == Utils.empty || ((state.m_board[r][c - 1] != Utils.empty) && (Utils.getColorPiece(state.m_board[r][c - 1]) == 1)))) {
-                list.add(new Action(state.m_agentPos, new Position(r, c - 1)));
+        }
+        if (r - 1 >= 0) {
+            if (c - 1 >= 0 && (state.m_board[r - 1][c - 1] == Utils.empty || ((state.m_board[r - 1][c - 1] != Utils.empty) && (Utils.getColorPiece(state.m_board[r - 1][c - 1]) == 1)))) {
+                list.add(new Action(state.m_agentPos, new Position(r - 1, c - 1)));
             }
+            if (state.m_board[r - 1][c] == Utils.empty || ((state.m_board[r - 1][c] != Utils.empty) && (Utils.getColorPiece(state.m_board[r - 1][c]) == 1))) {
+                list.add(new Action(state.m_agentPos, new Position(r - 1, c)));
+            }
+            if (c + 1 < state.m_boardSize && (state.m_board[r - 1][c + 1] == Utils.empty || ((state.m_board[r - 1][c + 1] != Utils.empty) && (Utils.getColorPiece(state.m_board[r - 1][c + 1]) == 1)))) {
+                list.add(new Action(state.m_agentPos, new Position(r - 1, c + 1)));
+            }
+        }
+        if (c + 1 < state.m_boardSize && (state.m_board[r][c + 1] == Utils.empty || ((state.m_board[r][c + 1] != Utils.empty) && (Utils.getColorPiece(state.m_board[r][c + 1]) == 1)))) {
+            list.add(new Action(state.m_agentPos, new Position(r, c + 1)));
+        }
+        if (c - 1 >= 0 && (state.m_board[r][c - 1] == Utils.empty || ((state.m_board[r][c - 1] != Utils.empty) && (Utils.getColorPiece(state.m_board[r][c - 1]) == 1)))) {
+            list.add(new Action(state.m_agentPos, new Position(r, c - 1)));
+        }
         //}
 
         return list;

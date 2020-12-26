@@ -8,10 +8,11 @@ public class State {
 	public int m_agent = -1; // the type of piece
 	public int m_color = 0; // 0 for white, 1 for black
 	public int m_boardSize = -1; 
-	
+	int[] numPieces;
 	// constructor
-	public State(int[][] board){//, Position pos, int a){
+	public State(int[][] board, int[] numPieces){//, Position pos, int a){
 		m_board = board;
+                this.numPieces = numPieces;
 		//m_agentPos = pos;
 		//m_agent = a;
 		
@@ -45,8 +46,11 @@ public class State {
 		
 		for(int r=0;r<this.m_boardSize;r++)
 			System.arraycopy(this.m_board[r], 0, cBoard[r], 0, this.m_boardSize);
+                int[] cNumPieces = new int[12];
+                for(int i=0;i<12;i++)
+                    cNumPieces[i]=this.numPieces[i];
 		
-		return new State(cBoard);//, this.m_agentPos.copy(),m_agent);
+		return new State(cBoard, cNumPieces);//, this.m_agentPos.copy(),m_agent);
 	}
 	
 	// apply a given action over the current state -which remains unmodified. Return a new state

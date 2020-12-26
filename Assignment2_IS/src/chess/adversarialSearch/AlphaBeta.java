@@ -23,11 +23,16 @@ import java.util.ArrayList;
  * @author maric
  */
 public class AlphaBeta {
-
+    boolean player = true; //true = max, false = min
     State state;
     
     Piece piece = null;
-
+    
+    public AlphaBeta(State s){
+        this.state = s;
+    }
+    
+    
     public void movements(int color) {
 
         //Pasamos como parámetro el tablero actual.
