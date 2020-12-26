@@ -1,5 +1,6 @@
 package chess;
 
+import chess.pieces.Piece;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Random;
@@ -242,7 +243,7 @@ public class Utils {
         }
 
     }
-
+    
     // main to test the methods
     /*public static void main(String[] args) {
 	
