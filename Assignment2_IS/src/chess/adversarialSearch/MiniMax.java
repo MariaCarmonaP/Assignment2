@@ -24,8 +24,13 @@ public class MiniMax {
     
     ArrayList<Action> allMovements = new ArrayList<>();
     
-    public MiniMax(State s) {
+    int depth = 0;
+    
+    int maxDepth;
+    
+    public MiniMax(State s, int maxDepth) {
         this.state = s;
+        this.maxDepth = maxDepth;
     }
     public int utility(State s){
         int value=0;
@@ -115,7 +120,6 @@ public class MiniMax {
         }
         
         return a;
-        
     }
     
     public double maxValue (State s) {
@@ -127,6 +131,12 @@ public class MiniMax {
         }
         
         value = MIN_VALUE;
+        
+        depth++;
+        
+        if (depth == maxDepth) {
+            return utility(s);
+        }
         
         for (int i = 0; i < allMovements.size(); i++) {
             value = Math.max(value, minValue(s.applyAction(allMovements.get(i))));
@@ -145,6 +155,12 @@ public class MiniMax {
         }
         
         value = MAX_VALUE;
+        
+        depth++;
+        
+        if (depth == maxDepth) {
+            return utility(s);
+        }
         
         for (int i = 0; i < allMovements.size(); i++) {
             value = Math.min(value, maxValue(s.applyAction(allMovements.get(i))));
