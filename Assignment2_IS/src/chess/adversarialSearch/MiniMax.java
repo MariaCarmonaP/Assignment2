@@ -12,6 +12,8 @@ import chess.pieces.Pawn;
 import chess.pieces.Piece;
 import chess.pieces.Queen;
 import chess.pieces.Rook;
+import static java.lang.Integer.MAX_VALUE;
+import static java.lang.Integer.MIN_VALUE;
 import java.util.ArrayList;
 
 public class MiniMax {
@@ -19,6 +21,9 @@ public class MiniMax {
     boolean player = true; //true = max, false = min
     State state;
     Piece piece = null;
+    
+    ArrayList<Action> allMovements = new ArrayList<>();
+    
     public MiniMax(State s) {
         this.state = s;
     }
@@ -37,7 +42,7 @@ public class MiniMax {
 
     public ArrayList<Action> movements(int color) {
         //Pasamos como parámetro el tablero actual.
-        ArrayList<Action> allMovements = new ArrayList<>();
+        
         int n = state.m_boardSize;              //Board size.
         int i = 0, row = 0, column = 0;
         for (int r = 0; r < n; r++) {
@@ -95,4 +100,58 @@ public class MiniMax {
         }
         return piece;
     }
+    
+        public Action minimaxDecision (State s) {
+        
+        Action a = null;
+        
+        double value = maxValue(s);
+        
+        for (int i = 0; i < allMovements.size(); i++) {
+            if (maxValue (s.applyAction(allMovements.get(i))) == value) {
+                a = allMovements.get(i);
+                break;
+            }
+        }
+        
+        return a;
+        
+    }
+    
+    public double maxValue (State s) {
+        
+        double value;
+        
+        if (s.isFinal()) {
+            return utility(s);
+        }
+        
+        value = MIN_VALUE;
+        
+        for (int i = 0; i < allMovements.size(); i++) {
+            value = Math.max(value, minValue(s.applyAction(allMovements.get(i))));
+        }
+        
+        return value;
+    }
+    
+    
+    public double minValue (State s) {
+        
+        double value;
+        
+        if (s.isFinal()) {
+            return utility(s);
+        }
+        
+        value = MAX_VALUE;
+        
+        for (int i = 0; i < allMovements.size(); i++) {
+            value = Math.min(value, maxValue(s.applyAction(allMovements.get(i))));
+        }
+        
+        return value;
+        
+    }
+    
 }
