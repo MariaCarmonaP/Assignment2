@@ -135,58 +135,6 @@ public class Utils {
     }
 
     /**
-     * This method generates a problem instance.
-     *
-     * @param n size of the board
-     * @param p probability for each piece to be included
-     * @param seed to initiate the random generator (for reproducibility)
-     * @param agent the type of piece who will "play" the game (always white)
-     * @return the initial state (board and agent)
-     */
-//    public static State getProblemInstance(int n, double p, int seed, int agent) {
-//        int[] numPieces = {8, 2, 2, 2, 1, 1, 8, 2, 2, 2, 1, 1};
-//        int[][] board = new int[n][n];
-//        for (int r = 0; r < n; r++) {
-//            for (int c = 0; c < n; c++) {
-//                board[r][c] = Utils.empty;
-//            }
-//        }
-//
-//        Random gen = new Random(seed);
-//
-//        // adjusting the number of possible  pieces according to board's size
-//        double f = (n * n) / 64.0;
-//        for (int i = 0; i < numPieces.length; i++) {
-//            numPieces[i] = (int) Math.round(numPieces[i] * f);
-//        }
-//
-//        numPieces[agent] -= 1;
-//        ArrayList<Position> allPositions = getAllBoardPositions(n);
-//
-//        // placing our agent in the first row, we know these are the first n elements in allPositions
-//        int r = gen.nextInt(n);
-//        Position agentPos = allPositions.remove(r);
-//        board[agentPos.row][agentPos.col] = agent;
-//
-//        // placing the rest of pieces
-//        Position pos = null;
-//        for (int piece = 0; piece < diffPieces; piece++) {
-//            for (int j = 0; j < numPieces[piece]; j++) {
-//                if (gen.nextDouble() <= p) {
-//                    r = gen.nextInt(allPositions.size());
-//                    pos = allPositions.remove(r);
-//                    board[pos.row][pos.col] = piece;
-//                }
-//            }
-//        }
-//
-//        // Creating the instance, i.e., the state
-//        State state = new State(board, agentPos, agent);
-//
-//        return state;
-//    }
-
-    /**
      * fill (by rows) an ArrayList with all the possible coordinates
      *
      * @param n size of the board

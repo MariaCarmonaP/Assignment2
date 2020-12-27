@@ -11,7 +11,7 @@ public class Rook extends Piece {
     // constructor
     public Rook(int color) {
         m_color = color;
-        this.valor = 5;
+   //     this.valor = 5;
         if (color == 0) {
             m_type = Utils.wRook;
         } else {

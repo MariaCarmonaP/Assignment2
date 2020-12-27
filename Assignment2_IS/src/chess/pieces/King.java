@@ -20,7 +20,7 @@ public class King extends Piece {
     // constructor
     public King(int color) {
         m_color = color;
-        this.valor = 0;
+     //   this.valor = 0;
         if (color == 0) {
             m_type = Utils.wKing;
         } else {
@@ -29,6 +29,7 @@ public class King extends Piece {
 
     }
 
+    @Override
     public ArrayList<Action> getPossibleActions(State state) {
 
         int c, r;
@@ -40,7 +41,7 @@ public class King extends Piece {
 
         }
 
-        ArrayList<Action> list = new ArrayList<Action>(3);
+        ArrayList<Action> list = new ArrayList<>(3);
 
         //if (m_color == 0) {// White king
         if (r + 1 < state.m_boardSize) {

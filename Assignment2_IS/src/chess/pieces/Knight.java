@@ -20,7 +20,7 @@ public class Knight extends Piece {
     // constructor
     public Knight(int color) {
         m_color = color;
-        this.valor = 3;
+  //      this.valor = 3;
         if (color == 0) {
             m_type = Utils.wKnight;
         } else {

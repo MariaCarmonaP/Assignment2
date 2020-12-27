@@ -20,7 +20,7 @@ public class Queen extends Piece{
     // constructor
 	public Queen( int color){
 		m_color = color;
-		this.valor = 9;
+	//	this.valor = 9;
 		if (color==0) m_type = Utils.wQueen;
 		else m_type = Utils.bQueen;
 		

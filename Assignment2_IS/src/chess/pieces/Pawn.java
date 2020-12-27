@@ -12,7 +12,7 @@ public class Pawn extends Piece {
     // constructor
     public Pawn(int color) {
         m_color = color;
-        this.valor=1;
+  //      this.valor=1;
         if (color == 0) {
             m_type = Utils.wPawn;
         } else {

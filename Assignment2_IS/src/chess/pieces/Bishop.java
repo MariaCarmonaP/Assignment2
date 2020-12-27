@@ -10,7 +10,6 @@ public class Bishop extends Piece{
     
     public Bishop( int color){
 		m_color = color;
-		this.valor=3;
 		if (color==0) m_type = Utils.wBishop;
 		else m_type = Utils.bBishop;
 		
