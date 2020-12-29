@@ -5,8 +5,8 @@ package chess;
 
 public class Action {
 	
-	Position m_initPos = null;
-	Position m_finalPos = null;
+	public Position m_initPos = null;
+	public Position m_finalPos = null;
 	
 	public Action(Position p0, Position p1) {
 		m_initPos = p0;

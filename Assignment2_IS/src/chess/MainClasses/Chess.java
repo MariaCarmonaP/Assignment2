@@ -84,17 +84,17 @@ public class Chess {
     public static void dummy(State s, Adversarial a){
         boolean fin = false;
         Action action;
-        //try{
+        try{
         while(!fin){
             Utils.printBoard(s);
             action =a.decision(s);
             //System.out.println("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nAction: "+action);
             s = s.applyAction(action);
-            //Thread.sleep(1000);
+            Thread.sleep(1000);
         }
-//        }catch (InterruptedException e){
-//            System.out.println(e);
-//        }
+        }catch (InterruptedException e){
+            System.out.println(e);
+        }
     }
     
     public static void whiteBlack(State s, Adversarial a){
