@@ -35,8 +35,8 @@ public class Pawn extends Piece {
             if (state.m_board[r - 1][c] == Utils.empty) {//standard pawn move
                 list.add(new Action(state.m_agentPos, new Position(r + 1, c)));
             }
-            if ((r == 6) && (state.m_board[r - 2][c] == Utils.empty) && (state.m_board[r + 1][c] == Utils.empty)) {//starting pawn move
-                list.add(new Action(state.m_agentPos, new Position(r + 2, c)));
+            if ((r == 6) && (state.m_board[r - 2][c] == Utils.empty) && (state.m_board[r - 1][c] == Utils.empty)) {//starting pawn move
+                list.add(new Action(state.m_agentPos, new Position(r - 2, c)));
             }
             if ((c < (state.m_boardSize - 1)) && (state.m_board[r - 1][c + 1] != Utils.empty)
                     && (Utils.getColorPiece(state.m_board[r - 1][c + 1]) == 1)) {//capture
