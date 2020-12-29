@@ -41,7 +41,7 @@ public class King extends Piece {
 
         }
 
-        ArrayList<Action> list = new ArrayList<>(3);
+        ArrayList<Action> list = new ArrayList<>(8);
 
         //if (m_color == 0) {// White king
         if (r + 1 < state.m_boardSize) {

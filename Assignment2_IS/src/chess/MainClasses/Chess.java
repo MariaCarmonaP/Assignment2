@@ -1,7 +1,11 @@
 package chess.MainClasses;
 
+import chess.Action;
 import chess.State;
 import chess.Utils;
+import chess.adversarialSearch.Adversarial;
+import chess.adversarialSearch.Alphabeta;
+import chess.adversarialSearch.Minimax;
 import java.util.Scanner;
 
 public class Chess {
@@ -10,16 +14,20 @@ public class Chess {
 ////////////////////////////////////////////////////////////////////////////////
 //VARIABLE DECLARATION
 ////////////////////////////////////////////////////////////////////////////////
-        String method;
-        boolean initial;
-        int depth;
-        String color;
-        int maxTurns;
-        double p;
-        int seed;
+        //Parameters
+        String method = null;
+        boolean initial = true;
+        int depth = -1;
+        String color = null;
+        int maxTurns = -1;
+        double p = -1;
+        int seed = -1;
         // other-parameters
         String[] args1;
+
         State state;
+        Adversarial machine = null; //La maquina, siempre habrá al menos un jugador que sea maquina
+        //Adversarial black; //Piezas negras
 ////////////////////////////////////////////////////////////////////////////////
 //PARAMETER VALIDATION
 ////////////////////////////////////////////////////////////////////////////////
@@ -41,8 +49,63 @@ public class Chess {
                 }
             }
         }
-    }
+////////////////////////////////////////////////////////////////////////////////
+//INITIALIZING THE PROBLEM DEPENDING ON PARAMETERS
+////////////////////////////////////////////////////////////////////////////////
+        if (initial) {
+            state = Utils.getChessInstance();
+        } else {
+            state = Utils.getChessInstancePosition(p, seed);
+        }
+        switch (method) {
+            case "minimax":
+                machine = new Minimax(state, depth, maxTurns);
+                break;
+            case "alphabeta":
+                machine = new Alphabeta(state, depth, maxTurns);
+        }
+        switch (color){
+            case "white":
+                whiteBlack(state, machine);
+                break;
+            case "black":
+                humanMove(state);
+                break;
+            case "both":
+                
+                break;
+            case "dummy":
+                dummy(state, machine);
+        }
+        
 
+    }
+    
+    public static void dummy(State s, Adversarial a){
+        boolean fin = false;
+        Action action;
+        try{
+        while(!fin){
+            Utils.printBoard(s);
+            action =a.decision(s);
+            System.out.println("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nAction: "+action);
+            s = s.applyAction(action);
+            Thread.sleep(1000);
+        }
+        }catch (InterruptedException e){
+            System.out.println(e);
+        }
+    }
+    
+    public static void whiteBlack(State s, Adversarial a){
+        
+    }
+    
+    public static void humanMove(State s){
+        System.out.println("YOUR TURN: ");
+        Utils.printBoard(s);
+        
+    }
     public static String[] checkUsage(String[] args) {
         boolean wrong = false;
         if (args.length < 5 || args.length > 7) {
@@ -63,8 +126,15 @@ public class Chess {
         }
         switch (args[1]) {
             case "true":
+                if (args.length != 5) {
+                    System.out.println("\nParameters seed and probability will not be needed.\n");
+                }
                 break;
             case "false":
+                if (args.length != 7) {
+                    System.out.println("\nError: incorrect number of parameters.\nStarting the game from a provided position requires aditional parameters probability and seedprovided.\n");
+                    return null;
+                }
                 break;
             default:
                 System.out.println("\nError: incorrect initial value passed (parameter 2).\n");
@@ -175,6 +245,6 @@ public class Chess {
         System.out.println("5.- Max turns: Game stops when this number of turns is reached, should be >0.");
         System.out.println("6.- Probability: [Optional] Probability of the pieces appearing on the board.\n\tValid values: 0<=p<=1.");
         System.out.println("7.- Seed: [Optional] Seed to generate the initial configuration.\n\tValid values: Should be >0.");
-        
+
     }
 }

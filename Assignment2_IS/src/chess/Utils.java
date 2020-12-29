@@ -21,7 +21,7 @@ public class Utils {
     public static final int bQueen = 10;
     public static final int bKing = 11;
     public static final int empty = 12;
-    
+
     // number of pieces
     public static final int diffPieces = 12;
 
@@ -42,8 +42,8 @@ public class Utils {
     public static State getChessInstancePosition(double p, int seed) {
         int n = 8;
         int[][] board = new int[n][n];
-        int[] numPieces = {8,2,2,2,1,1,8,2,2,2,1,1};
-        int[] numPieces1 = {0,0,0,0,0,0,0,0,0,0,0,0};
+        int[] numPieces = {8, 2, 2, 2, 1, 1, 8, 2, 2, 2, 1, 1};
+        int[] numPieces1 = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
         for (int r = 0; r < n; r++) {
             for (int c = 0; c < n; c++) {
                 board[r][c] = Utils.empty;
@@ -111,15 +111,16 @@ public class Utils {
         board[n - 1][3] = Utils.bKing;
         board[n - 1][4] = Utils.bQueen;
 // Creating the instance, i.e., the state
-        int[] numPieces = {8,2,2,2,1,1,8,2,2,2,1,1};
+        int[] numPieces = {8, 2, 2, 2, 1, 1, 8, 2, 2, 2, 1, 1};
         State state = new State(board, numPieces);
         return state;
     }
 
     /**
      * Get colour piece
+     *
      * @param piece
-     * @return 
+     * @return
      */
     public static int getColorPiece(int piece) {
         if ((piece >= 0) && (piece <= 5)) {
@@ -138,7 +139,7 @@ public class Utils {
      * fill (by rows) an ArrayList with all the possible coordinates
      *
      * @param n size of the board
-     * @return 
+     * @return
      */
     public static ArrayList<Position> getAllBoardPositions(int n) {
         ArrayList<Position> pos = new ArrayList<>(n * n);
@@ -153,6 +154,7 @@ public class Utils {
 
     /**
      * Print a state (board + agent)
+     *
      * @param state
      */
     public static void printBoard(State state) {
@@ -181,11 +183,7 @@ public class Utils {
         for (int r = 0; r < size; r++) {
             System.out.print(df.format(r) + "|");
             for (int c = 0; c < size; c++) {
-                if ((c == state.m_agentPos.col) && (r == state.m_agentPos.row)) {
-                    System.out.print("*" + letters[state.m_board[r][c]] + "|");
-                } else {
-                    System.out.print(" " + letters[state.m_board[r][c]] + "|");
-                }
+                System.out.print(" " + letters[state.m_board[r][c]] + "|");
             }
             //botton row
             System.out.println("  ");
@@ -196,7 +194,7 @@ public class Utils {
         }
 
     }
-    
+
     // main to test the methods
     /*public static void main(String[] args) {
 	
