@@ -22,15 +22,13 @@ import chess.pieces.Rook;
  */
 public class Adversarial {
     public static int[] valuePieces = {1, 5, 3, 3, 9, 0, 1, 5, 3, 3, 9, 0};
-    State state;
     Piece piece = null;
     int depth = 0;
     int turns = 0;
     int maxDepth;
     int maxTurns;
     
-    public Adversarial(State s, int maxDepth, int maxTurns) {
-        this.state = s;
+    public Adversarial(int maxDepth, int maxTurns) {
         this.maxDepth = maxDepth;
         this.maxTurns = maxTurns;
     }

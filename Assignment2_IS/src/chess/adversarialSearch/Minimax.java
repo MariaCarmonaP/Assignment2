@@ -13,8 +13,8 @@ public class Minimax extends Adversarial {
     //boolean player = true; //true = max, false = min
     double[] valores;
 
-    public Minimax(State s, int maxDepth, int maxTurns) {
-        super(s, maxDepth, maxTurns);
+    public Minimax(int maxDepth, int maxTurns) {
+        super(maxDepth, maxTurns);
     }
 
     public int utility(State s) {

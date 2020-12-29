@@ -59,10 +59,10 @@ public class Chess {
         }
         switch (method) {
             case "minimax":
-                machine = new Minimax(state, depth, maxTurns);
+                machine = new Minimax(depth, maxTurns);
                 break;
             case "alphabeta":
-                machine = new Alphabeta(state, depth, maxTurns);
+                machine = new Alphabeta(depth, maxTurns);
         }
         switch (color){
             case "white":
