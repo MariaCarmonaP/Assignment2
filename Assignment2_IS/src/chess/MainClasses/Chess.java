@@ -88,7 +88,7 @@ public class Chess {
         while(!fin){
             Utils.printBoard(s);
             action =a.decision(s);
-            System.out.println("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nAction: "+action);
+            //System.out.println("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nAction: "+action);
             s = s.applyAction(action);
             Thread.sleep(1000);
         }
