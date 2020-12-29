@@ -12,7 +12,7 @@ public class Minimax extends Adversarial {
 
 
     boolean player = true; //true = max, false = min
-    ArrayList<Action> allMovements = new ArrayList<>();
+    //ArrayList<Action> allMovements = new ArrayList<>();
     ArrayList<Action> toChooseFrom;
     double[] valores;
 
@@ -30,13 +30,12 @@ public class Minimax extends Adversarial {
         return value;
     }
 
-    public void movements(int color) {
-        ArrayList<Action> actions;
-        int n = state.m_boardSize;              //Board size.
-        //int i = 0, row = 0, column = 0;
-        for (int r = 0; r < n; r++) {
-            for (int c = 0; c < n; c++) {
-                if (state.m_board[r][c]!=12 && (state.m_color=Utils.getColorPiece(state.m_board[r][c])) == color) {
+    public ArrayList<Action> movements(int color) {
+        ArrayList<Action> actions= new ArrayList<>();
+        ArrayList<Action> allMovements = new ArrayList<>();
+        for (int r = 0; r < 8; r++) {
+            for (int c = 0; c < 8; c++) {
+                if (state.m_board[r][c]<12 && (state.m_color=Utils.getColorPiece(state.m_board[r][c])) == color) {
                     state.m_agent = state.m_board[r][c];
                     piece = choosePiece(state);
                     state.m_agentPos = new Position(r, c);
@@ -46,23 +45,23 @@ public class Minimax extends Adversarial {
                 }
             }
         }
-        //return allMovements;
+        return allMovements;
     }
 
     @Override
     public Action decision(State s) {
-
+        ArrayList<Action> allMovements;
         Action a = null;
         //depth = 0;
-        movements(0);
+        allMovements = movements(0);
         valores = new double[allMovements.size()];
         System.out.println("Numero de posibles acciones: "+ allMovements.size());
-        toChooseFrom = (ArrayList<Action>)allMovements.clone();
+        //toChooseFrom = (ArrayList<Action>)allMovements.clone();
         double value = maxValue(s, 0);
 
-        for (int i = 0; i < toChooseFrom.size(); i++) {
+        for (int i = 0; i < allMovements.size(); i++) {
             if (valores[i] == value) {
-                a = toChooseFrom.get(i);
+                a = allMovements.get(i);
                 break;
             }
         }
@@ -71,7 +70,7 @@ public class Minimax extends Adversarial {
     }
 
     public double maxValue(State s, int dmax) {
-        int proban2;
+        ArrayList<Action> allMovements;
         double value;
         int dMax=dmax+1;
         if (s.isFinal()) {
@@ -88,11 +87,11 @@ public class Minimax extends Adversarial {
         }
         
         //System.out.println("MAX After maxDepth: "+ dMax);
-        ArrayList<Action> allMovements = new ArrayList<>();
-        movements(0);
-        proban2 = allMovements.size();
-        System.out.println("Proban2: "+ proban2);
-        for (int i = 0; i < proban2; i++) {
+        
+        allMovements = movements(0);
+//        proban2 = allMovements.size();
+//        System.out.println("Proban2: "+ proban2);
+        for (int i = 0; i < allMovements.size(); i++) {
             value = Math.max(value, minValue(s.applyAction(allMovements.get(i)), dMax));
             if(dMax==1){
                 valores[i] = value;
@@ -104,7 +103,7 @@ public class Minimax extends Adversarial {
     }
 
     public double minValue(State s, int dmin) {
-
+        ArrayList<Action> allMovements;
         double value;
         int dMin = dmin+1;
         if (s.isFinal()) {
@@ -122,7 +121,7 @@ public class Minimax extends Adversarial {
             
         }
         //System.out.println("MIN After maxDepth: "+ dMin);
-        movements(1);
+        allMovements = movements(1);
         for (int i = 0; i < allMovements.size(); i++) {
             value = Math.min(value, maxValue(s.applyAction(allMovements.get(i)), dMin));
         }
