@@ -51,7 +51,16 @@ public class State {
         newState.m_board[action.m_initPos.row][action.m_initPos.col] = Utils.empty;
         newState.m_board[action.m_finalPos.row][action.m_finalPos.col] = newState.m_agent;
         newState.m_agentPos = action.m_finalPos;
-
+        if(newState.m_color==0){
+            if((action.m_finalPos.row-action.m_initPos.row)>0){
+                newState.distFin[0]++;
+            }
+        } else {
+            if((action.m_finalPos.row-action.m_initPos.row)<0){
+                newState.distFin[1]++;
+            }
+        }
+        
         return newState;
     }
 }

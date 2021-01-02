@@ -23,9 +23,9 @@ public class Minimax extends Adversarial {
             value += s.numPieces[i] * valuePieces[i];
         }
         if (s.m_color == 0) {
-            value += ((s.distFin[0] - 8) * 5) / 48;
+            value += s.distFin[0];
         } else {
-            value += ((s.distFin[1] - 8) * 5) / 48;
+            value += s.distFin[1];
         }
         value += s.isJaque;
         return value;
@@ -40,11 +40,12 @@ public class Minimax extends Adversarial {
                     s.m_agent = s.m_board[r][c];
                     piece = choosePiece(s);
                     s.m_agentPos = new Position(r, c);
-                    if (color == 0) {
-                        s.distFin[color] += s.m_agentPos.row;
-                    } else {
-                        s.distFin[color] += 7 - s.m_agentPos.row;
-                    }
+//                    if(piece instanceof Pawn)
+//                    if (color == 0) {
+//                        s.distFin[color] += r-1;
+//                    } else {
+//                        s.distFin[color] += 7 - (r+1);
+//                    }
 
                     if ((actions = piece.getPossibleActions(s)) != null) {
                         allMovements.addAll(actions);
@@ -60,6 +61,7 @@ public class Minimax extends Adversarial {
         ArrayList<Action> allMovements;
         Action a = null;
         allMovements = movements(color, s);
+        s.distFin[color]=0;
         valores = new double[allMovements.size()];
         double value = maxValue(s, 0, color);
         for (int i = 0; i < allMovements.size(); i++) {
