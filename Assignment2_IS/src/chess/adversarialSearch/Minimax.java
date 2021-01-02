@@ -18,30 +18,7 @@ public class Minimax extends Adversarial {
     }
 
 
-    public ArrayList<Action> movements(int color, State s) {
-        ArrayList<Action> actions = new ArrayList<>();
-        ArrayList<Action> allMovements = new ArrayList<>();
-        for (int r = 0; r < 8; r++) {
-            for (int c = 0; c < 8; c++) {
-                if (s.m_board[r][c] < 12 && (s.m_color = Utils.getColorPiece(s.m_board[r][c])) == color) {
-                    s.m_agent = s.m_board[r][c];
-                    piece = choosePiece(s);
-                    s.m_agentPos = new Position(r, c);
-//                    if(piece instanceof Pawn)
-//                    if (color == 0) {
-//                        s.distFin[color] += r-1;
-//                    } else {
-//                        s.distFin[color] += 7 - (r+1);
-//                    }
-
-                    if ((actions = piece.getPossibleActions(s)) != null) {
-                        allMovements.addAll(actions);
-                    }
-                }
-            }
-        }
-        return allMovements;
-    }
+    
 
     @Override
     public Action decision(State s, int color) {

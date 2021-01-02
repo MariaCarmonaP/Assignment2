@@ -24,25 +24,6 @@ public class Alphabeta extends Adversarial{
         super(maxDepth, maxTurns);
     }
     
-    
-    public ArrayList<Action> movements(int color, State s) {
-        ArrayList<Action> actions= new ArrayList<>();
-        ArrayList<Action> allMovements = new ArrayList<>();
-        for (int r = 0; r < 8; r++) {
-            for (int c = 0; c < 8; c++) {
-                if (s.m_board[r][c]<12 && (s.m_color=Utils.getColorPiece(s.m_board[r][c])) == color) {
-                    s.m_agent = s.m_board[r][c];
-                    piece = choosePiece(s);
-                    s.m_agentPos = new Position(r, c);
-                    if ((actions = piece.getPossibleActions(s)) != null) {
-                        allMovements.addAll(actions);
-                    }
-                }
-            }
-        }
-        return allMovements;
-    }
-    
 
     
     //INCOMPLETO 
@@ -58,8 +39,14 @@ public class Alphabeta extends Adversarial{
         value = maxValue (s, Integer.MIN_VALUE, Integer.MAX_VALUE, depth, color);
         
         for (int i = 0; i < allMovements.size(); i++) {
-            if (utility(s.applyAction(allMovements.get(i))) == value) {
+            if (valores[i] == value) {
                 a = allMovements.get(i);
+//                System.out.println("Action: " + a + "\tPiece: " + s.m_agent + "\tPosition: " + s.m_agentPos + "\tColor: " + s.m_color);
+                s.m_agent = s.m_board[a.m_initPos.row][a.m_initPos.col];
+                s.m_agentPos = a.m_initPos;
+                s.m_color = Utils.getColorPiece(s.m_agent);
+//                System.out.println("Action: " + a + "\tPiece: " + s.m_agent + "\tPosition: " + s.m_agentPos + "\tColor: " + s.m_color);
+                break;
             }
         }
         
@@ -86,7 +73,9 @@ public class Alphabeta extends Adversarial{
         }
         for (int i = 0; i < allMovements.size(); i++) {
             value = Math.max(value, minValue(s.applyAction(allMovements.get(i)), alpha, beta, dMax, color));
-            
+            if (dMax == 1) {
+                valores[i] = value;
+            }
             if (value >= beta) {
                 return value;
             }
