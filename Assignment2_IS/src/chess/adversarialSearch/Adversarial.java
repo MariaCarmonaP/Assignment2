@@ -33,7 +33,7 @@ public class Adversarial {
         this.maxTurns = maxTurns;
     }
     
-    public Action decision(State s){
+    public Action decision(State s, int color){
         return null;    //Nunca llega, se overridea
     }
     

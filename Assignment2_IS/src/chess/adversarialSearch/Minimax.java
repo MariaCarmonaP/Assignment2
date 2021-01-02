@@ -17,10 +17,15 @@ public class Minimax extends Adversarial {
         super(maxDepth, maxTurns);
     }
 
-    public int utility(State s) {
-        int value = 0;
+    public double utility(State s) {
+        double value = 0;
         for (int i = 0; i < s.numPieces.length; i++) {
             value += s.numPieces[i] * valuePieces[i];
+        }
+        if (s.m_color == 0) {
+            value += ((s.distFin[0] - 8) * 5) / 48;
+        } else {
+            value += ((s.distFin[1] - 8) * 5) / 48;
         }
         value += s.isJaque;
         return value;
@@ -35,6 +40,12 @@ public class Minimax extends Adversarial {
                     s.m_agent = s.m_board[r][c];
                     piece = choosePiece(s);
                     s.m_agentPos = new Position(r, c);
+                    if (color == 0) {
+                        s.distFin[color] += s.m_agentPos.row;
+                    } else {
+                        s.distFin[color] += 7 - s.m_agentPos.row;
+                    }
+
                     if ((actions = piece.getPossibleActions(s)) != null) {
                         allMovements.addAll(actions);
                     }
@@ -45,12 +56,12 @@ public class Minimax extends Adversarial {
     }
 
     @Override
-    public Action decision(State s) {
+    public Action decision(State s, int color) {
         ArrayList<Action> allMovements;
         Action a = null;
-        allMovements = movements(0, s);
+        allMovements = movements(color, s);
         valores = new double[allMovements.size()];
-        double value = maxValue(s, 0);
+        double value = maxValue(s, 0, color);
         for (int i = 0; i < allMovements.size(); i++) {
             if (valores[i] == value) {
                 a = allMovements.get(i);
@@ -65,7 +76,7 @@ public class Minimax extends Adversarial {
         return a;
     }
 
-    public double maxValue(State s, int dmax) {
+    public double maxValue(State s, int dmax, int color) {
         ArrayList<Action> allMovements;
         double value;
         int dMax = dmax + 1;
@@ -76,9 +87,14 @@ public class Minimax extends Adversarial {
         if (dMax >= maxDepth) {
             return utility(s);
         }
-        allMovements = movements(0, s);
+        allMovements = movements(color, s);
+        if (color == 0) {
+            color = 1;
+        } else {
+            color = 0;
+        }
         for (int i = 0; i < allMovements.size(); i++) {
-            value = Math.max(value, minValue(s.applyAction(allMovements.get(i)), dMax));
+            value = Math.max(value, minValue(s.applyAction(allMovements.get(i)), dMax, color));
             if (dMax == 1) {
                 valores[i] = value;
             }
@@ -86,7 +102,7 @@ public class Minimax extends Adversarial {
         return value;
     }
 
-    public double minValue(State s, int dmin) {
+    public double minValue(State s, int dmin, int color) {
         ArrayList<Action> allMovements;
         double value;
         int dMin = dmin + 1;
@@ -97,15 +113,15 @@ public class Minimax extends Adversarial {
         if (dMin >= maxDepth) {
             return utility(s);
         }
-        allMovements = movements(1, s);
-
+        allMovements = movements(color, s);
+        if (color == 0) {
+            color = 1;
+        } else {
+            color = 0;
+        }
         for (int i = 0; i < allMovements.size(); i++) {
-//            try {
-                value = Math.min(value, maxValue(s.applyAction(allMovements.get(i)), dMin));
-//            } catch (ArrayIndexOutOfBoundsException e) {
-//                System.out.println("Action: " + allMovements.get(i));
-//                System.out.println("Piece: "+ s.m_board[allMovements.get(i).m_initPos.row][allMovements.get(i).m_initPos.col]);
-//            }
+
+            value = Math.min(value, maxValue(s.applyAction(allMovements.get(i)), dMin, color));
         }
 
         return value;

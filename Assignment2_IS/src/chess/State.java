@@ -9,6 +9,7 @@ public class State {
     public int m_color = 0; // 0 for white, 1 for black
     public int m_boardSize = -1;
     public int[] numPieces;
+    public int[] distFin = new int[2];
     public int isJaque=0;   //Negativo si hay más piezas negras que blancas dando jaque,
                             //positivo si hay mas blancas que negras dando jaque
                             //0 si hay el mismo numero de piezas blancas y negras dando jaque
@@ -19,6 +20,8 @@ public class State {
         m_board = board;
         this.numPieces = numPieces;
         m_boardSize = 8;
+        distFin[0] = 0;
+        distFin[1] = 0;
     }
 
     public boolean isFinal() {
