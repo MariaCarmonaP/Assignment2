@@ -18,8 +18,7 @@ import java.util.ArrayList;
  * @author maric
  */
 public class Alphabeta extends Adversarial{
-    boolean player = true; //true = max, false = min
-    ArrayList<Action> allMovements = new ArrayList<>();
+    double[] valores;
 
     public Alphabeta(int maxDepth, int maxTurns) {
         super(maxDepth, maxTurns);
@@ -28,7 +27,7 @@ public class Alphabeta extends Adversarial{
     
     public ArrayList<Action> movements(int color, State s) {
         ArrayList<Action> actions= new ArrayList<>();
-        
+        ArrayList<Action> allMovements = new ArrayList<>();
         for (int r = 0; r < 8; r++) {
             for (int c = 0; c < 8; c++) {
                 if (s.m_board[r][c]<12 && (s.m_color=Utils.getColorPiece(s.m_board[r][c])) == color) {
@@ -44,29 +43,19 @@ public class Alphabeta extends Adversarial{
         return allMovements;
     }
     
-    public double utility(State s) {
-        double value = 0;
-        for (int i = 0; i < s.numPieces.length; i++) {
-            value += s.numPieces[i] * valuePieces[i];
-        }
-        if (s.m_color == 0) {
-            value += s.distFin[0];
-        } else {
-            value += s.distFin[1];
-        }
-        value += s.isJaque;
-        //System.out.println("" + value);
-        return value;
-    }
+
     
     //INCOMPLETO 
-    public Action alphaBetaCutoff (State s) {
+    @Override
+    public Action decision (State s, int color) {
         Action a = null;
-        
+        ArrayList<Action> allMovements = new ArrayList<>();
         double value = 0.0;
-        
+        allMovements = movements(color, s);
+        s.distFin[color]=0;
+        valores = new double[allMovements.size()];
         //INCOMPLETO
-        //value = maxValue (s, alpha, beta, depth);
+        value = maxValue (s, Integer.MIN_VALUE, Integer.MAX_VALUE, depth, color);
         
         for (int i = 0; i < allMovements.size(); i++) {
             if (utility(s.applyAction(allMovements.get(i))) == value) {
@@ -78,18 +67,25 @@ public class Alphabeta extends Adversarial{
     }
 
     
-    public double maxValue(State s, double alpha, double beta, int depth) {
-        
-        //FALTA IF INICIAL
-        
-        if (depth == maxDepth) {
-            utility(s);
+    public double maxValue(State s, double alpha, double beta, int depth, int color) {
+        ArrayList<Action> allMovements = new ArrayList<>();
+        double value;
+        int dMax = depth + 1;
+        if (s.isFinal()) {
+            return utility(s);
         }
-        
-        double value = MIN_VALUE;
-        
+        value = MIN_VALUE;
+        if (dMax >= maxDepth) {
+            return utility(s);
+        }
+        allMovements = movements(color, s);
+        if (color == 0) {
+            color = 1;
+        } else {
+            color = 0;
+        }
         for (int i = 0; i < allMovements.size(); i++) {
-            value = Math.max(value, minValue(s.applyAction(allMovements.get(i)), alpha, beta, depth + 1));
+            value = Math.max(value, minValue(s.applyAction(allMovements.get(i)), alpha, beta, dMax, color));
             
             if (value >= beta) {
                 return value;
@@ -101,18 +97,25 @@ public class Alphabeta extends Adversarial{
         return value;
     }
     
-    public double minValue (State s, double alpha, double beta, int depth) {
-        
-        //FALTA IF INICIAL
-        
-        if (depth == maxDepth) {
-            utility(s);
+    public double minValue (State s, double alpha, double beta, int depth, int color) {
+        ArrayList<Action> allMovements = new ArrayList<>();
+        double value;
+        int dMin = depth + 1;
+        if (s.isFinal()) {
+            return utility(s);
         }
-        
-        double value = MAX_VALUE;
-        
+        value = MAX_VALUE;
+        if (dMin >= maxDepth) {
+            return utility(s);
+        }
+        allMovements = movements(color, s);
+        if (color == 0) {
+            color = 1;
+        } else {
+            color = 0;
+        }
         for (int i = 0; i < allMovements.size(); i++) {
-            value = Math.min(value, maxValue(s.applyAction(allMovements.get(i)), alpha, beta, depth + 1));
+            value = Math.min(value, maxValue(s.applyAction(allMovements.get(i)), alpha, beta, dMin, color));
             
             if (value >= alpha) {
                 return value;

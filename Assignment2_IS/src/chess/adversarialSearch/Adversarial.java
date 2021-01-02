@@ -37,6 +37,21 @@ public class Adversarial {
         return null;    //Nunca llega, se overridea
     }
     
+        public double utility(State s) {
+        double value = 0;
+        for (int i = 0; i < s.numPieces.length; i++) {
+            value += s.numPieces[i] * valuePieces[i];
+        }
+        if (s.m_color == 0) {
+            value += s.distFin[0];
+        } else {
+            value += s.distFin[1];
+        }
+        value += s.isJaque;
+        //System.out.println("" + value);
+        return value;
+    }
+        
     public Piece choosePiece(State s0) {
         
         Piece p = null;
