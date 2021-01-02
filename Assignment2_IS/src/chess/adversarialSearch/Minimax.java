@@ -28,6 +28,7 @@ public class Minimax extends Adversarial {
             value += s.distFin[1];
         }
         value += s.isJaque;
+        //System.out.println("" + value);
         return value;
     }
 
