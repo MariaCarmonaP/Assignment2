@@ -28,6 +28,12 @@ public class Minimax extends Adversarial {
         s.distFin[color]=0;
         valores = new double[allMovements.size()];
         double value = maxValue(s, 0, color);
+        
+        turns++;
+        if (turns == maxTurns) {
+            return null;
+        }
+        
         for (int i = 0; i < allMovements.size(); i++) {
             if (valores[i] == value) {
                 a = allMovements.get(i);
