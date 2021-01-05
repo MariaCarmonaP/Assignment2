@@ -66,10 +66,10 @@ public class Chess {
         }
         switch (color){
             case "white":
-                whiteBlack(state, machine);
+                humanMove(state, machine, 0);
                 break;
             case "black":
-                humanMove(state);
+                humanMove(state, machine, 0);
                 break;
             case "both":
                 both(state, machine);
@@ -167,7 +167,7 @@ public class Chess {
             
         }
     }
-    public static void humanMove(State s){
+    public static void humanMove(State s, Adversarial a, int color){
         System.out.println("YOUR TURN: ");
         Utils.printBoard(s);
         
