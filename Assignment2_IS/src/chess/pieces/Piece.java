@@ -10,8 +10,8 @@ import java.util.ArrayList;
 public class Piece {
 
     // members
-    int m_color = -1;
-    int m_type = -1;
+    public int m_color = -1;
+    public int m_type = -1;
 //	int valor;
     // this method must be overwritten by all the possible pieces
 

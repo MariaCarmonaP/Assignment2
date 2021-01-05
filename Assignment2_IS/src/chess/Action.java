@@ -7,6 +7,7 @@ public class Action {
 	
 	public Position m_initPos = null;
 	public Position m_finalPos = null;
+       // public boolean peonllego = false;
 	
 	public Action(Position p0, Position p1) {
 		m_initPos = p0;

@@ -31,11 +31,9 @@ public class Minimax extends Adversarial {
         for (int i = 0; i < allMovements.size(); i++) {
             if (valores[i] == value) {
                 a = allMovements.get(i);
-                System.out.println("Action: " + a + "\tPiece: " + s.m_agent + "\tPosition: " + s.m_agentPos + "\tColor: " + s.m_color);
                 s.m_agent = s.m_board[a.m_initPos.row][a.m_initPos.col];
                 s.m_agentPos = a.m_initPos;
                 s.m_color = Utils.getColorPiece(s.m_agent);
-                System.out.println("Action: " + a + "\tPiece: " + s.m_agent + "\tPosition: " + s.m_agentPos + "\tColor: " + s.m_color);
                 break;
             }
         }

@@ -23,17 +23,19 @@ import java.util.ArrayList;
  * @author maric
  */
 public class Adversarial {
-    public static int[] valuePieces = {1, 5, 3, 3, 9, 0, 1, 5, 3, 3, 9, 0};
+
+    public static int[] valuePieces = {1, 5, 3, 3, 9, 0, -1, -5, -3, -3, -9, 0};
     Piece piece = null;
     int depth = 0;
     int turns = 0;
     int maxDepth;
     int maxTurns;
-    
+
     public Adversarial(int maxDepth, int maxTurns) {
         this.maxDepth = maxDepth;
         this.maxTurns = maxTurns;
     }
+
     public ArrayList<Action> movements(int color, State s) {
         ArrayList<Action> actions = new ArrayList<>();
         ArrayList<Action> allMovements = new ArrayList<>();
@@ -58,29 +60,39 @@ public class Adversarial {
         }
         return allMovements;
     }
-    public Action decision(State s, int color){
+
+    public Action decision(State s, int color) {
         return null;    //Nunca llega, se overridea
     }
-    
-        public double utility(State s) {
+
+    public double utility(State s) {
         double value = 0;
         for (int i = 0; i < s.numPieces.length; i++) {
             value += s.numPieces[i] * valuePieces[i];
         }
-        if (s.m_color == 0) {
-            value += s.distFin[0];
-        } else {
-            value += s.distFin[1];
-        }
+//        if (s.m_color == 0) {
+//            value += s.distFin[0];
+//        } else {
+//            value += s.distFin[1];
+//        }
         value += s.isJaque;
         //System.out.println("" + value);
         return value;
     }
-        
+    public Adversarial copy(){
+        Adversarial nuevo = new Adversarial(this.maxDepth, this.maxTurns);
+        nuevo.depth=this.depth;
+        nuevo.piece=new Piece();
+        nuevo.piece.m_color = this.piece.m_color;
+        nuevo.piece.m_type = this.piece.m_type;
+        nuevo.turns = this.turns;
+        return nuevo;
+    }
+
     public Piece choosePiece(State s0) {
-        
+
         Piece p = null;
-        
+
         switch (s0.m_agent) {
             case Utils.wRook:
                 p = new Rook(0);
@@ -119,7 +131,7 @@ public class Adversarial {
                 p = new King(1);
                 break;
         }
-        
+
         return p;
     }
 }

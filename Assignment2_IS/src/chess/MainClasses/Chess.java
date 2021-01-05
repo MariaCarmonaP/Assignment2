@@ -6,6 +6,7 @@ import chess.Utils;
 import chess.adversarialSearch.Adversarial;
 import chess.adversarialSearch.Alphabeta;
 import chess.adversarialSearch.Minimax;
+import com.sun.xml.internal.bind.v2.runtime.output.SAXOutput;
 import java.util.Scanner;
 
 public class Chess {
@@ -72,7 +73,7 @@ public class Chess {
                 humanMove(state);
                 break;
             case "both":
-                
+                both(state, machine);
                 break;
             case "dummy":
                 dummy(state, machine);
@@ -98,9 +99,33 @@ public class Chess {
     }
     
     public static void whiteBlack(State s, Adversarial a){
-        
+        boolean fin = false;
+        Action action;
+        while(!fin){
+            Utils.printBoard(s);
+            action =a.decision(s, 0);
+            s = s.applyAction(action);
+        }
     }
-    
+    public static void both(State s, Adversarial a1){
+        Adversarial a2 = a1.copy();
+        boolean fin = false;
+        Action action;
+        while(!fin){
+            System.out.println("///////////////////////////////////////////////////////////////");
+            System.out.println("/////////////////////TURNO DE LAS BLANCAS//////////////////////");
+            System.out.println("///////////////////////////////////////////////////////////////");
+            Utils.printBoard(s);
+            action =a1.decision(s, 0);
+            s = s.applyAction(action);
+            System.out.println("///////////////////////////////////////////////////////////////");
+            System.out.println("/////////////////////TURNO DE LAS NEGRAS///////////////////////");
+            System.out.println("///////////////////////////////////////////////////////////////");
+            Utils.printBoard(s);
+            action = a2.decision(s, 1);
+            s = s.applyAction(action);
+        }
+    }
     public static void humanMove(State s){
         System.out.println("YOUR TURN: ");
         Utils.printBoard(s);

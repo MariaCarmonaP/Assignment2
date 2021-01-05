@@ -28,12 +28,17 @@ public class Pawn extends Piece {
         int c, r;
         c = state.m_agentPos.col;
         r = state.m_agentPos.row;
+        Action a;
         
         ArrayList<Action> list = new ArrayList<>(4);
 
         if (m_color == 1) {//black pawn ... I will let this for now ...
-            if (state.m_board[r - 1][c] == Utils.empty) {//standard pawn move
-                list.add(new Action(state.m_agentPos, new Position(r + 1, c)));
+            if ((r>0)&&state.m_board[r - 1][c] == Utils.empty) {//standard pawn move
+//                a = new Action(state.m_agentPos, new Position(r - 1, c));
+//                if(r==0)
+//                    a.peonllego=true;
+//                list.add(a);
+                list.add(new Action(state.m_agentPos, new Position(r - 1, c)));
             }
             if ((r == 6) && (state.m_board[r - 2][c] == Utils.empty) && (state.m_board[r - 1][c] == Utils.empty)) {//starting pawn move
                 list.add(new Action(state.m_agentPos, new Position(r - 2, c)));
@@ -51,17 +56,23 @@ public class Pawn extends Piece {
         
 
         if (m_color == 0) {// white pawn
-            if (state.m_board[r + 1][c] == Utils.empty) {//standard pawn move
+           
+            if ((r<7) && state.m_board[r + 1][c] == Utils.empty) {//standard pawn move
+                list.add(new Action(state.m_agentPos, new Position(r + 1, c)));
+//                a = new Action(state.m_agentPos, new Position(r + 1, c));
+//                if(r==7)
+//                    a.peonllego=true;
+//                list.add(a);
                 list.add(new Action(state.m_agentPos, new Position(r + 1, c)));
             }
             if ((r == 1) && (state.m_board[r + 2][c] == Utils.empty) && (state.m_board[r + 1][c] == Utils.empty)) {//starting pawn move
                 list.add(new Action(state.m_agentPos, new Position(r + 2, c)));
             }
-            if ((c > 0) && (state.m_board[r + 1][c - 1] != Utils.empty)
+            if ((c > 0)&&(r<7) && (state.m_board[r + 1][c - 1] != Utils.empty)
                     && (Utils.getColorPiece(state.m_board[r + 1][c - 1]) == 1)) {//capture
                 list.add(new Action(state.m_agentPos, new Position(r + 1, c - 1)));
             }
-            if ((c < (state.m_boardSize - 1)) && (state.m_board[r + 1][c + 1] != Utils.empty)
+            if ((c < (state.m_boardSize - 1))&&(r<7) && (state.m_board[r + 1][c + 1] != Utils.empty)
                     && (Utils.getColorPiece(state.m_board[r + 1][c + 1]) == 1)) {//capture
                 list.add(new Action(state.m_agentPos, new Position(r + 1, c + 1)));
             }
