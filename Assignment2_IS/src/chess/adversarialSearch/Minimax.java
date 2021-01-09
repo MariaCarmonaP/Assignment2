@@ -1,7 +1,6 @@
 package chess.adversarialSearch;
 
 import chess.Action;
-import chess.Position;
 import chess.State;
 import chess.Utils;
 import static java.lang.Integer.MAX_VALUE;
@@ -10,16 +9,12 @@ import java.util.ArrayList;
 
 public class Minimax extends Adversarial {
 
-    //boolean player = true; //true = max, false = min
     double[] valores;
 
     public Minimax(int maxDepth, int maxTurns) {
         super(maxDepth, maxTurns);
     }
-
-
     
-
     @Override
     public Action decision(State s, int color) {
         ArrayList<Action> allMovements;
@@ -30,7 +25,7 @@ public class Minimax extends Adversarial {
         double value = maxValue(s, 0, color);
         
         turns++;
-        if (turns == maxTurns) {
+        if (turns > maxTurns) {
             return null;
         }
         
@@ -93,7 +88,6 @@ public class Minimax extends Adversarial {
 
             value = Math.min(value, maxValue(s.applyAction(allMovements.get(i)), dMin, color));
         }
-
         return value;
     }
 }

@@ -9,6 +9,7 @@ import chess.Action;
 import chess.Position;
 import chess.State;
 import chess.Utils;
+import chess.pieces.Piece;
 import static java.lang.Integer.MAX_VALUE;
 import static java.lang.Integer.MIN_VALUE;
 import java.util.ArrayList;
@@ -36,10 +37,10 @@ public class Alphabeta extends Adversarial{
         s.distFin[color]=0;
         valores = new double[allMovements.size()];
         //INCOMPLETO
-        value = maxValue (s, Integer.MIN_VALUE, Integer.MAX_VALUE, depth, color, turns);
+        value = maxValue (s, Integer.MIN_VALUE, Integer.MAX_VALUE, depth, color);
         
         turns++;
-        if (turns == maxTurns) {
+        if (turns > maxTurns) {
             return null;
         }
         
@@ -59,7 +60,7 @@ public class Alphabeta extends Adversarial{
     }
 
     
-    public double maxValue(State s, double alpha, double beta, int depth, int color, int t) {
+    public double maxValue(State s, double alpha, double beta, int depth, int color) {
         ArrayList<Action> allMovements = new ArrayList<>();
         double value;
         int dMax = depth + 1;
@@ -70,9 +71,9 @@ public class Alphabeta extends Adversarial{
         if (dMax >= maxDepth) {
             return utility(s);
         }
-        if (t == maxTurns) {
-            return utility(s);
-        }
+//        if (t == maxTurns) {
+//            return utility(s);
+//        }
         allMovements = movements(color, s);
         if (color == 0) {
             color = 1;
@@ -80,7 +81,7 @@ public class Alphabeta extends Adversarial{
             color = 0;
         }
         for (int i = 0; i < allMovements.size(); i++) {
-            value = Math.max(value, minValue(s.applyAction(allMovements.get(i)), alpha, beta, dMax, color, t+1));
+            value = Math.max(value, minValue(s.applyAction(allMovements.get(i)), alpha, beta, dMax, color));
             if (dMax == 1) {
                 valores[i] = value;
             }
@@ -94,7 +95,7 @@ public class Alphabeta extends Adversarial{
         return value;
     }
     
-    public double minValue (State s, double alpha, double beta, int depth, int color, int t) {
+    public double minValue (State s, double alpha, double beta, int depth, int color) {
         ArrayList<Action> allMovements = new ArrayList<>();
         double value;
         int dMin = depth + 1;
@@ -105,10 +106,6 @@ public class Alphabeta extends Adversarial{
         if (dMin >= maxDepth) {
             return utility(s);
         }
-        if (t == maxTurns) {
-            return utility(s);
-        }
-        
         allMovements = movements(color, s);
         if (color == 0) {
             color = 1;
@@ -116,7 +113,7 @@ public class Alphabeta extends Adversarial{
             color = 0;
         }
         for (int i = 0; i < allMovements.size(); i++) {
-            value = Math.min(value, maxValue(s.applyAction(allMovements.get(i)), alpha, beta, dMin, color, t+1));
+            value = Math.min(value, maxValue(s.applyAction(allMovements.get(i)), alpha, beta, dMin, color));
             
             if (value >= alpha) {
                 return value;
@@ -127,7 +124,4 @@ public class Alphabeta extends Adversarial{
         
         return value;
     }
-    
-    
-
 }

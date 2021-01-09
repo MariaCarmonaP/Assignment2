@@ -32,8 +32,8 @@ public class Adversarial {
     int maxTurns;
 
     public Adversarial(int maxDepth, int maxTurns) {
-        this.maxDepth = maxDepth;
         this.maxTurns = maxTurns;
+        this.maxDepth = (maxDepth>maxTurns) ? maxTurns : maxDepth;
     }
 
     public ArrayList<Action> movements(int color, State s) {
@@ -45,12 +45,12 @@ public class Adversarial {
                     s.m_agent = s.m_board[r][c];
                     piece = choosePiece(s);
                     s.m_agentPos = new Position(r, c);
-//                    if(piece instanceof Pawn)
-//                    if (color == 0) {
-//                        s.distFin[color] += r-1;
-//                    } else {
-//                        s.distFin[color] += 7 - (r+1);
-//                    }
+                    if(piece instanceof Pawn)
+                    if (color == 0) {
+                        s.distFin[color] += r-1;
+                    } else {
+                        s.distFin[color] += 7 - (r+1);
+                    }
 
                     if ((actions = piece.getPossibleActions(s)) != null) {
                         allMovements.addAll(actions);
@@ -70,17 +70,24 @@ public class Adversarial {
         for (int i = 0; i < s.numPieces.length; i++) {
             value += s.numPieces[i] * valuePieces[i];
         }
-//        if (s.m_color == 0) {
-//            value += s.distFin[0];
-//        } else {
-//            value += s.distFin[1];
-//        }
+        if (s.m_color == 0) {
+            value += s.distFin[0];
+        } else {
+            value += s.distFin[1];
+        }
         value += s.isJaque;
         //System.out.println("" + value);
         return value;
     }
     public Adversarial copy(){
-        Adversarial nuevo = new Adversarial(this.maxDepth, this.maxTurns);
+        Adversarial nuevo;
+        if(this instanceof Alphabeta){
+            nuevo = new Alphabeta(this.maxDepth, this.maxTurns);
+        } else if (this instanceof Minimax){
+            nuevo = new Minimax(this.maxDepth, this.maxTurns);
+        } else {
+            nuevo = new Adversarial(this.maxDepth, this.maxTurns);
+        }
         nuevo.depth=this.depth;
         nuevo.piece=new Piece();
         nuevo.piece.m_color = this.piece.m_color;
@@ -89,6 +96,9 @@ public class Adversarial {
         return nuevo;
     }
 
+    public void initTurns(int turn){
+        this.turns = turn;
+    }
     public Piece choosePiece(State s0) {
 
         Piece p = null;

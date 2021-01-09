@@ -69,6 +69,7 @@ public class Chess {
                 humanMove(state, machine, 0);
                 break;
             case "black":
+                machine.initTurns(1);
                 humanMove(state, machine, 0);
                 break;
             case "both":
@@ -111,10 +112,10 @@ public class Chess {
         }
     }
     public static void both(State s, Adversarial a1){
-        
+        int turns = 0;
         boolean fin = false;
         
-        Adversarial a2;
+        //Adversarial a2;
         Action action;
         
         System.out.println("///////////////////////////////////////////////////////////////");
@@ -123,48 +124,36 @@ public class Chess {
         Utils.printBoard(s);
             
         action = a1.decision(s, 0);        
-        a2 = a1.copy();
+        //a2 = a1.copy();
         
         s = s.applyAction(action);
-        System.out.println("///////////////////////////////////////////////////////////////");
-        System.out.println("/////////////////////TURNO DE LAS BLANCAS//////////////////////");
-        System.out.println("///////////////////////////////////////////////////////////////");
+        turns++;
+        System.out.println("\n\tTURNO DE LAS BLANCAS: "+turns+"\n");
         Utils.printBoard(s);
-        action = a2.decision(s, 1);
+        action = a1.decision(s, 1);
         s = s.applyAction(action);
-        
-        System.out.println("///////////////////////////////////////////////////////////////");
-        System.out.println("/////////////////////TURNO DE LAS NEGRAS///////////////////////");
-        System.out.println("///////////////////////////////////////////////////////////////");
+        turns++;
+        System.out.println("\n\tTURNO DE LAS NEGRAS: "+turns+"\n");
         Utils.printBoard(s);
-            
-
         while(!fin){
             action =a1.decision(s, 0);
             if (action == null){
-                fin = true;
                 break;
             }
             s = s.applyAction(action);
-            System.out.println("///////////////////////////////////////////////////////////////");
-            System.out.println("/////////////////////TURNO DE LAS BLANCAS//////////////////////");
-            System.out.println("///////////////////////////////////////////////////////////////");
+            turns++;
+            System.out.println("\n\tTURNO DE LAS BLANCAS: "+turns+"\n");
             Utils.printBoard(s);
             
-            action = a2.decision(s, 1);
+            action = a1.decision(s, 1);
             
             if (action == null){
-                fin = true;
                 break;
             }
             s = s.applyAction(action);
-            System.out.println("///////////////////////////////////////////////////////////////");
-            System.out.println("/////////////////////TURNO DE LAS NEGRAS///////////////////////");
-            System.out.println("///////////////////////////////////////////////////////////////");
+            turns++;
+            System.out.println("\n\tTURNO DE LAS NEGRAS: "+turns+"\n");
             Utils.printBoard(s);
-            
-            
-            
         }
     }
     public static void humanMove(State s, Adversarial a, int color){
