@@ -187,7 +187,7 @@ public class Chess {
                 rowSelected = read.nextInt();
                 System.out.println("Choose the column of the piece you want to move");
                 columnSelected = read.nextInt();                
-                if (s.m_board[rowSelected][columnSelected] != -1 && s.m_color == color && s.m_board[rowSelected][columnSelected] < 12) {
+                if (rowSelected>-1&&rowSelected<8&&columnSelected>-1&&columnSelected<8&&s.m_board[rowSelected][columnSelected] != -1 && s.m_color == color && s.m_board[rowSelected][columnSelected] < 12) {
                     check = true;
                     pieceSelected = Utils.choosePiece(s.m_board[rowSelected][columnSelected]);
                 }
