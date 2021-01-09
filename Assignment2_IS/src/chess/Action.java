@@ -1,5 +1,7 @@
 package chess;
 
+import java.util.Objects;
+
 
 // in this class we define a basic action for our problem. Going from position p0 to position p1.
 
@@ -33,6 +35,25 @@ public class Action {
 		
 		return s;
 	}
+        
+        @Override
+        public boolean equals (Object action) {
+            boolean result = false;
+            
+            if (action instanceof Action) {
+                result = ((Action) action).m_initPos.equals(this.m_initPos) && ((Action) action).m_finalPos.equals(this.m_finalPos);
+            }
+            
+            return result;
+        }
+
+    /*@Override
+    public int hashCode() {
+        int hash = 5;
+        hash = 83 * hash + Objects.hashCode(this.m_initPos);
+        hash = 83 * hash + Objects.hashCode(this.m_finalPos);
+        return hash;
+    }*/
 	
 } // end of class
  

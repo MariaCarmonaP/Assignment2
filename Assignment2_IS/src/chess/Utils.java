@@ -1,6 +1,12 @@
 package chess;
 
+import chess.pieces.Bishop;
+import chess.pieces.King;
+import chess.pieces.Knight;
+import chess.pieces.Pawn;
 import chess.pieces.Piece;
+import chess.pieces.Queen;
+import chess.pieces.Rook;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Random;
@@ -193,6 +199,52 @@ public class Utils {
             System.out.println("--");
         }
 
+    }
+    
+    public static Piece choosePiece(int pi) {
+
+        Piece p = null;
+
+        switch (pi) {
+            case Utils.wRook:
+                p = new Rook(0);
+                break;
+            case Utils.bRook:
+                p = new Rook(1);
+                break;
+            case Utils.wPawn:
+                p = new Pawn(0);
+                break;
+            case Utils.bPawn:
+                p = new Pawn(1);
+                break;
+            case Utils.wBishop:
+                p = new Bishop(0);
+                break;
+            case Utils.bBishop:
+                p = new Bishop(1);
+                break;
+            case Utils.wKnight:
+                p = new Knight(0);
+                break;
+            case Utils.bKnight:
+                p = new Knight(1);
+                break;
+            case Utils.wQueen:
+                p = new Queen(0);
+                break;
+            case Utils.bQueen:
+                p = new Queen(1);
+                break;
+            case Utils.wKing:
+                p = new King(0);
+                break;
+            case Utils.bKing:
+                p = new King(1);
+                break;
+        }
+
+        return p;
     }
 
     // main to test the methods

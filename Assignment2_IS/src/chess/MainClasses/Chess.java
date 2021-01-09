@@ -1,11 +1,14 @@
 package chess.MainClasses;
 
 import chess.Action;
+import chess.Position;
 import chess.State;
 import chess.Utils;
 import chess.adversarialSearch.Adversarial;
 import chess.adversarialSearch.Alphabeta;
 import chess.adversarialSearch.Minimax;
+import chess.pieces.Piece;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Chess {
@@ -70,7 +73,7 @@ public class Chess {
                 break;
             case "black":
                 machine.initTurns(1);
-                humanMove(state, machine, 0);
+                humanMove(state, machine, 1);
                 break;
             case "both":
                 both(state, machine);
@@ -157,10 +160,90 @@ public class Chess {
         }
     }
     public static void humanMove(State s, Adversarial a, int color){
-        System.out.println("YOUR TURN: ");
+        
+        Scanner read = new Scanner(System.in);
+        
+        Action action = null;
+        
+        boolean fin = false;
+        
+        boolean check = false;
+        
+        int rowSelected = -1, columnSelected = -1;
+        
+        Piece pieceSelected = null;
+        
+        System.out.println("///////////////////////////////////////////////////////////////");
+        System.out.println("////////////////////////INCIO PARTIDA//////////////////////////");
+        System.out.println("///////////////////////////////////////////////////////////////");
         Utils.printBoard(s);
         
+        while (!fin) {
+
+            System.out.println("YOUR TURN: ");
+
+            while (!check) {
+                System.out.println("Choose the row of the piece you want to move");
+                rowSelected = read.nextInt();
+                System.out.println("Choose the column of the piece you want to move");
+                columnSelected = read.nextInt();                
+                if (s.m_board[rowSelected][columnSelected] != -1 && s.m_color == color && s.m_board[rowSelected][columnSelected] < 12) {
+                    check = true;
+                    pieceSelected = Utils.choosePiece(s.m_board[rowSelected][columnSelected]);
+                }
+            }
+            
+            check = false;
+            
+            Position actualPosition = new Position(rowSelected, columnSelected);
+            
+            s.m_agent = pieceSelected.m_type;
+            
+            s.m_agentPos = actualPosition;
+            
+            ArrayList<Action> possibleActions = pieceSelected.getPossibleActions(s);
+            
+            while (!check) {
+                System.out.println("Choose the row you want to move the piece");
+                int rowToMove = read.nextInt();
+                System.out.println("Choose the column you want to move the piece");
+                int columnToMove = read.nextInt();
+
+                
+                Position newPos = new Position(rowToMove, columnToMove);
+                action = new Action(actualPosition, newPos);
+                
+                if (possibleActions.contains(action)) {
+                    check = true;
+                }
+            } 
+
+            /*if (action == null) {
+                fin = true;
+                break;
+            }*/
+            
+            System.out.println(action.toString());
+            
+            s = s.applyAction(action);
+            Utils.printBoard(s);
+
+            System.out.println("///////////////////////////////////////////////////////////////");
+            System.out.println("///////////////////////TURNO DEL RIVAL/////////////////////////");
+            System.out.println("///////////////////////////////////////////////////////////////");
+
+            action = a.decision(s, 1);
+            if (action == null) {
+                fin = true;
+                break;
+            }
+            s = s.applyAction(action);
+            Utils.printBoard(s);
+        }
+        
     }
+        
+    
     public static String[] checkUsage(String[] args) {
         boolean wrong = false;
         if (args.length < 5 || args.length > 7) {
