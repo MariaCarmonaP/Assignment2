@@ -24,7 +24,7 @@ import java.util.ArrayList;
  */
 public class Adversarial {
 
-    public static int[] valuePieces = {1, 5, 3, 3, 9, 0, -1, -5, -3, -3, -9, 0};
+    public static int[] valuePieces = {1, 5, 3, 3, 9, 100, -1, -5, -3, -3, -9, -100};
     Piece piece = null;
     int depth = 0;
     int turns = 0;

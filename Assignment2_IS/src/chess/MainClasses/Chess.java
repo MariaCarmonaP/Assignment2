@@ -217,21 +217,16 @@ public class Chess {
                     check = true;
                 }
             } 
-
-            /*if (action == null) {
-                fin = true;
-                break;
-            }*/
-            
-            System.out.println(action.toString());
-            
+            System.out.println(action.toString()); 
             s = s.applyAction(action);
             Utils.printBoard(s);
-
+            if(s.isFinal()){
+                System.out.println("\nHUMAN WINS\n");
+                break;
+            }
             System.out.println("///////////////////////////////////////////////////////////////");
             System.out.println("///////////////////////TURNO DEL RIVAL/////////////////////////");
             System.out.println("///////////////////////////////////////////////////////////////");
-
             action = a.decision(s, 1);
             if (action == null) {
                 fin = true;
@@ -239,6 +234,10 @@ public class Chess {
             }
             s = s.applyAction(action);
             Utils.printBoard(s);
+            if(s.isFinal()){
+                System.out.println("\nMACHINE WINS\n");
+                break;
+            }
         }
         
     }
