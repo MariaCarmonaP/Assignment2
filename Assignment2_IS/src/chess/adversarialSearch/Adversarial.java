@@ -26,10 +26,10 @@ public class Adversarial {
 
     public static int[] valuePieces = {1, 5, 3, 3, 9, 100, -1, -5, -3, -3, -9, -100};
     Piece piece = null;
-    int depth = 0;
-    int turns = 0;
-    int maxDepth;
-    int maxTurns;
+    public int depth = 0;
+    public int turns = 0;
+    public int maxDepth;
+    public int maxTurns;
 
     public Adversarial(int maxDepth, int maxTurns) {
         this.maxTurns = maxTurns;

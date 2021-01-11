@@ -40,11 +40,14 @@ public class Piece {
                 if (agentColor != Utils.getColorPiece(state.m_board[r0][c])) { // capture piece
                     if(agentColor==0){ //La pieza es blanca
                         if(state.m_board[r0][c]==11)
+                            
                             state.isJaque += 5; //Las blancas están dando jaque
                     } else {
                         if(state.m_board[r0][c]==5)
+                            
                             state.isJaque -= 5; //Las negras están dando jaque
                     }
+                    state.numPieces[state.m_board[r0][c]]--;
                     action = new Action(state.m_agentPos, new Position(r0, c));
                     list.add(action);
                 }
@@ -73,11 +76,14 @@ public class Piece {
                 if (agentColor != Utils.getColorPiece(state.m_board[r0][c])) { // capture piece
                     if(agentColor==0){ //La pieza es blanca
                         if(state.m_board[r0][c]==11)
+                            
                             state.isJaque += 5; //Las blancas están dando jaque
                     } else {
                         if(state.m_board[r0][c]==5)
+                            
                             state.isJaque -= 5; //Las negras están dando jaque
                     }
+                    state.numPieces[state.m_board[r0][c]]--;
                     action = new Action(state.m_agentPos, new Position(r0, c));
                     list.add(action);
                 }
@@ -107,11 +113,14 @@ public class Piece {
                 if (agentColor != Utils.getColorPiece(state.m_board[r][c0])) { // capture piece
                     if(agentColor==0){ //La pieza es blanca
                         if(state.m_board[r][c0]==11)
+                            
                             state.isJaque += 5; //Las blancas están dando jaque
                     } else {
                         if(state.m_board[r][c0]==5)
+                            
                             state.isJaque -= 5; //Las negras están dando jaque
                     }
+                    state.numPieces[state.m_board[r][c0]]--;
                     action = new Action(state.m_agentPos, new Position(r, c0));
                     list.add(action);
                 }
@@ -141,11 +150,14 @@ public class Piece {
                 if (agentColor != Utils.getColorPiece(state.m_board[r][c0])) { // capture piece
                     if(agentColor==0){ //La pieza es blanca
                         if(state.m_board[r][c0]==11)
+                            
                             state.isJaque += 5; //Las blancas están dando jaque
                     } else {
                         if(state.m_board[r][c0]==5)
+                            
                             state.isJaque -= 5; //Las negras están dando jaque
                     }
+                    state.numPieces[state.m_board[r][c0]]--;
                     action = new Action(state.m_agentPos, new Position(r, c0));
                     list.add(action);
                 }
@@ -176,11 +188,14 @@ public class Piece {
                 if (agentColor != Utils.getColorPiece(state.m_board[r][c])) { // capture piece
                     if(agentColor==0){ //La pieza es blanca
                         if(state.m_board[r][c]==11)
+                            
                             state.isJaque += 5; //Las blancas están dando jaque
                     } else {
                         if(state.m_board[r][c]==5)
+                            
                             state.isJaque -= 5; //Las negras están dando jaque
                     }
+                    state.numPieces[state.m_board[r][c]]--;
                     action = new Action(state.m_agentPos, new Position(r, c));
                     list.add(action);
                 }
@@ -211,11 +226,14 @@ public class Piece {
                 if (agentColor != Utils.getColorPiece(state.m_board[r][c])) { // capture piece
                     if(agentColor==0){ //La pieza es blanca
                         if(state.m_board[r][c]==11)
+                            
                             state.isJaque += 5; //Las blancas están dando jaque
                     } else {
                         if(state.m_board[r][c]==5)
+                            
                             state.isJaque -= 5; //Las negras están dando jaque
                     }
+                    state.numPieces[state.m_board[r][c]]--;
                     action = new Action(state.m_agentPos, new Position(r, c));
                     list.add(action);
                 }
@@ -246,11 +264,14 @@ public class Piece {
                 if (agentColor != Utils.getColorPiece(state.m_board[r][c])) { // capture piece
                     if(agentColor==0){ //La pieza es blanca
                         if(state.m_board[r][c]==11)
+                            
                             state.isJaque += 5; //Las blancas están dando jaque
                     } else {
                         if(state.m_board[r][c]==5)
+                            
                             state.isJaque -= 5; //Las negras están dando jaque
                     }
+                    state.numPieces[state.m_board[r][c]]--;
                     action = new Action(state.m_agentPos, new Position(r, c));
                     list.add(action);
                 }
@@ -280,12 +301,15 @@ public class Piece {
                 busyCell = true;
                 if (agentColor != Utils.getColorPiece(state.m_board[r][c])) { // capture piece
                     if(agentColor==0){ //La pieza es blanca
+                        //state.numPieces[state.m_board[r][c]]--;
                         if(state.m_board[r][c]==11)
                             state.isJaque += 5; //Las blancas están dando jaque
                     } else {
+                        //state.numPieces[state.m_board[r][c]]--;
                         if(state.m_board[r][c]==5)
                             state.isJaque -= 5; //Las negras están dando jaque
                     }
+                    state.numPieces[state.m_board[r][c]]--;
                     action = new Action(state.m_agentPos, new Position(r, c));
                     list.add(action);
                 }

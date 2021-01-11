@@ -168,7 +168,7 @@ public class Chess {
         }
     }
 
-    public static void humanMove(State s, Adversarial a, int color) {
+    public static void humanMove(State s, Adversarial a, int colorPassed) {
 
         Scanner read = new Scanner(System.in);
 
@@ -177,7 +177,7 @@ public class Chess {
         boolean fin = false;
 
         boolean check = false;
-
+        
         int rowSelected = -1, columnSelected = -1;
 
         Piece pieceSelected = null;
@@ -190,20 +190,21 @@ public class Chess {
         while (!fin) {
 
             System.out.println("YOUR TURN: ");
-
+            
+            check = false;
+            
             while (!check) {
                 System.out.println("Choose the row of the piece you want to move");
                 rowSelected = read.nextInt();
                 System.out.println("Choose the column of the piece you want to move");
                 columnSelected = read.nextInt();
-                if (rowSelected > -1 && rowSelected < 8 && columnSelected > -1 && columnSelected < 8 && s.m_board[rowSelected][columnSelected] != -1 && s.m_color == color && s.m_board[rowSelected][columnSelected] < 12) {
+                if (rowSelected > -1 && rowSelected < 8 && columnSelected > -1 && columnSelected < 8 && s.m_board[rowSelected][columnSelected] != -1 && s.m_color == colorPassed && s.m_board[rowSelected][columnSelected] < 12) {
                     check = true;
                     pieceSelected = Utils.choosePiece(s.m_board[rowSelected][columnSelected]);
                 }
             }
 
-            check = false;
-
+            
             Position actualPosition = new Position(rowSelected, columnSelected);
 
             s.m_agent = pieceSelected.m_type;
@@ -212,6 +213,8 @@ public class Chess {
 
             ArrayList<Action> possibleActions = pieceSelected.getPossibleActions(s);
 
+            check = false;
+            
             while (!check) {
                 System.out.println("Choose the row you want to move the piece");
                 int rowToMove = read.nextInt();
@@ -224,7 +227,7 @@ public class Chess {
                 if (possibleActions.contains(action)) {
                     check = true;
                 }
-            }
+            }            
             System.out.println(action.toString());
             s = s.applyAction(action);
             Utils.printBoard(s);
@@ -241,6 +244,7 @@ public class Chess {
                 break;
             }
             s = s.applyAction(action);
+            s.m_color = colorPassed;
             Utils.printBoard(s);
             if (s.isFinal()) {
                 System.out.println("\nMACHINE WINS\n");
