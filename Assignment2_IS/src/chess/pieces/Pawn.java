@@ -63,7 +63,7 @@ public class Pawn extends Piece {
 //                if(r==7)
 //                    a.peonllego=true;
 //                list.add(a);
-                list.add(new Action(state.m_agentPos, new Position(r + 1, c)));
+                //list.add(new Action(state.m_agentPos, new Position(r + 1, c)));
             }
             if ((r == 1) && (state.m_board[r + 2][c] == Utils.empty) && (state.m_board[r + 1][c] == Utils.empty)) {//starting pawn move
                 list.add(new Action(state.m_agentPos, new Position(r + 2, c)));
